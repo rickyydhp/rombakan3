@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PT RITS NUSA KENARI - Integrated Facility Service & Parking Management</title>
+    <meta name="description" content="PT RITS NUSA KENARI menyediakan solusi manajemen parkir terintegrasi, sistem smart gate manless, dan layanan fasilitas profesional sejak 2025.">
+    <meta name="keywords" content="parking management, smart gate, facility service, RITS Nusa Kenari, sistem parkir">
+    <link rel="icon" type="image/png" href="logo.png">
 
     <!-- Framework & Fonts -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -153,6 +156,45 @@
         #mobileMenu.open {
             transform: translateX(0);
         }
+
+        /* Scroll Animation Styles */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* FAQ Accordion Transition */
+        .faq-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        /* Back to Top Visibility */
+        #backToTop.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Mencegah scroll saat menu mobile terbuka */
+        body.menu-open {
+            overflow: hidden;
+        }
+
+        /* Sembunyikan Scrollbar tapi tetap bisa digeser */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Portfolio Grid Limit: Hanya tampilkan 6 item pertama jika class 'grid-limited' aktif */
+        .grid-limited > .portfolio-item:nth-child(n+7) {
+            display: none;
+        }
     </style>
 </head>
 
@@ -161,11 +203,11 @@
     <!-- TOP BAR RUNNING TEXT -->
     <div class="marquee border-b border-[#D4AF37]">
         <div class="marquee-inner">
-            <span class="mx-10 font-bold text-[10px] uppercase tracking-[0.3em]">
+            <span class="mx-10 font-bold text-[8px] md:text-[10px] uppercase tracking-[0.3em]">
                 <i class="fas fa-shield-alt text-[#D4AF37] mr-2"></i> PT RITS NUSA KENARI — INTEGRATED PARKING SYSTEM —
                 MANLESS SMART GATE 2026 — REAL-TIME MONITORING — SECURITY & INTEGRITY FIRST —
             </span>
-            <span class="mx-10 font-bold text-[10px] uppercase tracking-[0.3em]">
+            <span class="mx-10 font-bold text-[8px] md:text-[10px] uppercase tracking-[0.3em]">
                 <i class="fas fa-shield-alt text-[#D4AF37] mr-2"></i> PT RITS NUSA KENARI — INTEGRATED PARKING SYSTEM —
                 MANLESS SMART GATE 2026 — REAL-TIME MONITORING — SECURITY & INTEGRITY FIRST —
             </span>
@@ -177,11 +219,11 @@
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <div class="flex items-center gap-4 cursor-pointer group" onclick="showPage('home')">
                 <div
-                    class="w-12 h-12 md:w-14 md:h-14 bg-[#800000] rounded-xl flex items-center justify-center shadow-lg group-hover:rotate-6 transition-transform">
+                    class="w-10 h-10 md:w-14 md:h-14 bg-[#800000] rounded-xl flex items-center justify-center shadow-lg group-hover:rotate-6 transition-transform">
                     <img src="logo.png" alt="RITS" class="w-8 h-8 md:w-10 md:h-10 object-contain">
                 </div>
                 <div>
-                    <h1 class="font-extrabold text-lg md:text-xl leading-none tracking-tighter text-[#3E2723]">RITS NUSA
+                    <h1 class="font-extrabold text-base md:text-xl leading-none tracking-tighter text-[#3E2723]">RITS NUSA
                         <span class="text-[#800000]">KENARI</span>
                     </h1>
                     <p class="text-[8px] md:text-[9px] font-bold text-gray-500 tracking-[0.3em] uppercase italic">
@@ -204,7 +246,7 @@
                     in Touch</button>
             </div>
 
-            <button class="lg:hidden text-2xl text-[#800000]" id="menuBtn"><i class="fas fa-bars"></i></button>
+            <button class="lg:hidden text-2xl text-[#800000]" id="menuBtn" aria-label="Open Menu"><i class="fas fa-bars"></i></button>
         </div>
     </nav>
 
@@ -237,21 +279,21 @@
                         <h2
                             class="text-[#D4AF37] font-black uppercase tracking-[0.5em] mb-4 text-[10px] md:text-xs animate-bounce">
                             Premium Quality Solution</h2>
-                        <h1 class="text-5xl md:text-8xl font-serif text-white leading-tight mb-8">Elevating <br><span
+                        <h1 class="text-4xl md:text-8xl font-serif text-white leading-tight mb-8">Elevating <br><span
                                 class="italic text-[#D4AF37]">Parking</span> Experience.</h1>
-                        <p class="text-base md:text-lg text-gray-300 mb-10 max-w-lg mx-auto lg:mx-0">Sistem parkir
+                        <p class="text-sm md:text-lg text-gray-300 mb-10 max-w-lg mx-auto lg:mx-0">Sistem parkir
                             terintegrasi yang menggabungkan transparansi data, keamanan berlapis, dan teknologi Manless
                             terkini.</p>
 
                         <!-- ACTION BUTTONS -->
-                        <div class="flex flex-wrap justify-center lg:justify-start gap-4">
+                        <div class="flex justify-center lg:justify-start gap-2 md:gap-4">
                             <button onclick="showPage('services')"
-                                class="bg-[#800000] text-white px-8 md:px-10 py-5 rounded-2xl font-black text-xs uppercase tracking-widest shadow-2xl hover:scale-105 transition-all">Mulai
+                                class="bg-[#800000] text-white px-6 md:px-10 py-4 md:py-5 rounded-2xl font-black text-[10px] md:text-xs uppercase tracking-widest shadow-2xl hover:scale-105 transition-all">Mulai
                                 Kerjasama</button>
 
                             <!-- FITUR BARU: DOWNLOAD COM-PRO -->
                             <a href="files/company-profile.pdf" download
-                                class="bg-transparent border-2 border-[#D4AF37] text-[#D4AF37] px-8 md:px-10 py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-[#D4AF37] hover:text-black transition-all flex items-center gap-3 shadow-xl">
+                                class="bg-transparent border-2 border-[#D4AF37] text-[#D4AF37] px-4 md:px-10 py-4 md:py-5 rounded-2xl font-black text-[10px] md:text-xs uppercase tracking-widest hover:bg-[#D4AF37] hover:text-black transition-all flex items-center gap-2 md:gap-3 shadow-xl whitespace-nowrap">
                                 <i class="fas fa-file-download"></i> Company Profile
                             </a>
                         </div>
@@ -263,7 +305,7 @@
                     </div>
                     <div class="hidden lg:block">
                         <div class="zoom-container border-4 border-white/10 animate-float p-2">
-                            <img src="https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=1000"
+                            <img src="https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=1000" loading="eager"
                                 alt="Smart Gate" class="rounded-[2rem]">
                         </div>
                     </div>
@@ -273,25 +315,46 @@
             <!-- TECH SPECIFICATION GRID -->
             <div class="max-w-7xl mx-auto px-6 -mt-16 relative z-20 pb-20">
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <div class="bg-white p-8 rounded-[2.5rem] shadow-xl border-b-8 border-[#800000] hover-card">
+                    <div class="bg-white p-6 md:p-8 rounded-[2.5rem] shadow-xl border-b-8 border-[#800000] hover-card">
                         <i class="fas fa-barcode text-3xl text-[#800000] mb-6"></i>
                         <h4 class="font-bold text-lg mb-2">Smart Dispenser</h4>
                         <p class="text-xs text-gray-500">Thermal ticket system dengan panduan suara & QR ready.</p>
                     </div>
-                    <div class="bg-white p-8 rounded-[2.5rem] shadow-xl border-b-8 border-[#1a1a1a] hover-card">
+                    <div class="bg-white p-6 md:p-8 rounded-[2.5rem] shadow-xl border-b-8 border-[#1a1a1a] hover-card">
                         <i class="fas fa-video text-3xl text-[#800000] mb-6"></i>
                         <h4 class="font-bold text-lg mb-2">AI Surveillance</h4>
                         <p class="text-xs text-gray-500">IP Camera ANPR untuk deteksi plat nomor otomatis 24/7.</p>
                     </div>
-                    <div class="bg-white p-8 rounded-[2.5rem] shadow-xl border-b-8 border-[#800000] hover-card">
+                    <div class="bg-white p-6 md:p-8 rounded-[2.5rem] shadow-xl border-b-8 border-[#800000] hover-card">
                         <i class="fas fa-microchip text-3xl text-[#800000] mb-6"></i>
                         <h4 class="font-bold text-lg mb-2">Barrier Gate</h4>
                         <p class="text-xs text-gray-500">High-speed engine 1.8 detik dengan fitur anti-collision.</p>
                     </div>
-                    <div class="bg-white p-8 rounded-[2.5rem] shadow-xl border-b-8 border-[#1a1a1a] hover-card">
+                    <div class="bg-white p-6 md:p-8 rounded-[2.5rem] shadow-xl border-b-8 border-[#1a1a1a] hover-card">
                         <i class="fas fa-cloud-upload-alt text-3xl text-[#800000] mb-6"></i>
                         <h4 class="font-bold text-lg mb-2">Cloud Report</h4>
                         <p class="text-xs text-gray-500">Dashboard pendapatan real-time yang dapat diakses via HP.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TRUSTED PARTNERS / CLIENTS -->
+            <div class="bg-white py-16 border-y border-gray-100 reveal">
+                <div class="max-w-7xl mx-auto px-6">
+                    <p class="text-center text-[10px] font-bold uppercase tracking-[0.4em] text-gray-400 mb-10">Trusted by Leading Industries</p>
+                    
+                    <!-- Container Geser (Scrollable) -->
+                    <div class="flex overflow-x-auto no-scrollbar items-center gap-16 md:gap-24 opacity-40 grayscale hover:grayscale-0 transition-all duration-500 pb-4 cursor-grab active:cursor-grabbing">
+                        <!-- Untuk menambah mitra, cukup copy-paste tag <img> di bawah ini -->
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b2/Pertamina_Logo.svg" alt="Pertamina" class="h-8 md:h-12 w-auto object-contain flex-shrink-0">
+                        <img src="https://upload.wikimedia.org/wikipedia/id/8/86/Jababeka_Logo.png" alt="Jababeka" class="h-8 md:h-12 w-auto object-contain flex-shrink-0">
+                        <img src="https://upload.wikimedia.org/wikipedia/id/thumb/0/03/Pelindo_2021.svg/1200px-Pelindo_2021.svg.png" alt="Pelindo" class="h-8 md:h-12 w-auto object-contain flex-shrink-0">
+                        <img src="https://upload.wikimedia.org/wikipedia/id/thumb/a/a2/Sinar_Mas_Group_Logo.svg/1200px-Sinar_Mas_Group_Logo.svg.png" alt="Sinar Mas" class="h-8 md:h-12 w-auto object-contain flex-shrink-0">
+                        <img src="https://upload.wikimedia.org/wikipedia/id/thumb/2/23/Logo_Ciputra.svg/1200px-Logo_Ciputra.svg.png" alt="Ciputra" class="h-8 md:h-12 w-auto object-contain flex-shrink-0">
+                        
+                        <!-- Placeholder tambahan untuk simulasi geser -->
+                        <div class="h-8 md:h-12 flex items-center font-black text-2xl text-gray-300 flex-shrink-0 italic tracking-tighter">PROJECT_ALPHA</div>
+                        <div class="h-8 md:h-12 flex items-center font-black text-2xl text-gray-300 flex-shrink-0 italic tracking-tighter">PROJECT_BETA</div>
                     </div>
                 </div>
             </div>
@@ -300,10 +363,10 @@
         <!-- ABOUT & DIRECTORS -->
         <section id="about" class="page-section py-24 px-6 bg-white">
             <div class="max-w-7xl mx-auto">
-                <div class="flex flex-col lg:flex-row gap-20 mb-32 items-center">
+                <div class="flex flex-col lg:flex-row gap-20 mb-32 items-center reveal">
                     <div class="lg:w-1/2">
                         <span class="text-[#800000] font-black uppercase tracking-widest text-xs">Visi Kami</span>
-                        <h2 class="text-4xl md:text-5xl font-serif mt-4 mb-8 leading-tight italic">Menjadi Pemimpin
+                        <h2 class="text-3xl md:text-5xl font-serif mt-4 mb-8 leading-tight italic">Menjadi Pemimpin
                             Dalam <span class="bg-[#800000] text-white px-4 not-italic">Integrated</span> Facility
                             Service.</h2>
                         <div class="space-y-6 text-[#4E342E] leading-relaxed">
@@ -319,7 +382,7 @@
                     <div class="lg:w-1/2 grid grid-cols-2 gap-4">
                         <div class="space-y-4 pt-12">
                             <div class="zoom-container h-48 md:h-64"><img
-                                    src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=400"></div>
+                                    src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=400" loading="lazy" alt="Office"></div>
                             <div class="bg-[#3E2723] p-8 rounded-3xl text-white text-center">
                                 <h5 class="text-2xl md:text-3xl font-bold">10+</h5>
                                 <p class="text-[8px] md:text-[10px] uppercase font-bold tracking-widest">Tahun
@@ -333,21 +396,21 @@
                                     Staff</p>
                             </div>
                             <div class="zoom-container h-64 md:h-80"><img
-                                    src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=400"></div>
+                                    src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=400" loading="lazy" alt="Building"></div>
                         </div>
                     </div>
                 </div>
 
-                <div class="text-center mb-20">
+                <div class="text-center mb-20 reveal">
                     <h2 class="text-4xl md:text-5xl font-serif italic mb-4 leading-none">Board of Directors</h2>
                     <div class="w-24 h-1.5 bg-[#800000] mx-auto rounded-full"></div>
                 </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 reveal">
                     <div class="group text-center">
                         <div
                             class="zoom-container h-96 mb-6 shadow-2xl border-b-8 border-transparent group-hover:border-[#800000]">
-                            <img src="foto/ruben.jpeg" class="grayscale group-hover:grayscale-0">
+                            <img src="foto/ruben.jpeg" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Ruben Etidena">
                             <div class="photo-text">
                                 <h4 class="text-xl font-black italic text-white">Ruben Etidena</h4>
                                 <p class="text-[10px] uppercase font-bold text-[#D4AF37]">Komisaris</p>
@@ -357,7 +420,7 @@
                     <div class="group text-center lg:-mt-12">
                         <div
                             class="zoom-container h-[450px] mb-6 shadow-2xl border-b-8 border-transparent group-hover:border-[#800000]">
-                            <img src="foto/john.jpeg" class="grayscale group-hover:grayscale-0">
+                            <img src="foto/john.jpeg" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Jhon Sius Langkola">
                             <div class="photo-text">
                                 <h4 class="text-xl font-black italic text-white">Jhon Sius Langkola</h4>
                                 <p class="text-[10px] uppercase font-bold text-[#D4AF37]">Direktur Utama</p>
@@ -367,7 +430,7 @@
                     <div class="group text-center">
                         <div
                             class="zoom-container h-96 mb-6 shadow-2xl border-b-8 border-transparent group-hover:border-[#800000]">
-                            <img src="foto/tius.jpeg" class="grayscale group-hover:grayscale-0">
+                            <img src="foto/tius.jpeg" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Ignatius Etidena">
                             <div class="photo-text">
                                 <h4 class="text-xl font-black italic text-white">Ignatius Etidena</h4>
                                 <p class="text-[10px] uppercase font-bold text-[#D4AF37]">Direktur Keuangan</p>
@@ -377,7 +440,7 @@
                     <div class="group text-center lg:-mt-12">
                         <div
                             class="zoom-container h-[450px] mb-6 shadow-2xl border-b-8 border-transparent group-hover:border-[#800000]">
-                            <img src="foto/toni.jpeg" class="grayscale group-hover:grayscale-0">
+                            <img src="foto/toni.jpeg" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Tony BBH">
                             <div class="photo-text">
                                 <h4 class="text-xl font-black italic text-white">Tony BBH.</h4>
                                 <p class="text-[10px] uppercase font-bold text-[#D4AF37]">Direktur Umum</p>
@@ -391,15 +454,15 @@
         <!-- SERVICES SECTION (Full 6 Models) -->
         <section id="services" class="page-section py-24 px-6 bg-[#F5E6D3]">
             <div class="max-w-7xl mx-auto">
-                <div class="text-center mb-20">
+                <div class="text-center mb-20 reveal">
                     <h2 class="text-4xl md:text-5xl font-serif italic mb-6">Model Kerja Sama Strategis</h2>
                     <p class="text-[#800000] font-bold tracking-widest uppercase text-xs">Pilihan Fleksibel Untuk Bisnis
                         Anda</p>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 reveal">
                     <div onclick="openModal('management')"
-                        class="bg-white p-12 rounded-[3rem] shadow-xl hover-card border-l-[12px] border-[#800000] cursor-pointer">
+                        class="bg-white p-8 md:p-12 rounded-[2.5rem] md:rounded-[3rem] shadow-xl hover-card border-l-[12px] border-[#800000] cursor-pointer">
                         <i class="fas fa-users-cog text-4xl text-[#3E2723] mb-8"></i>
                         <h3 class="text-2xl font-bold mb-4 italic">Management Fee</h3>
                         <p class="text-sm text-gray-500 mb-8">Pengelolaan operasional penuh oleh RITS dengan imbal jasa
@@ -409,7 +472,7 @@
                     </div>
 
                     <div onclick="openModal('profit')"
-                        class="bg-[#1A1A1A] p-12 rounded-[3rem] shadow-xl hover-card border-l-[12px] border-[#D4AF37] cursor-pointer text-white">
+                        class="bg-[#1A1A1A] p-8 md:p-12 rounded-[2.5rem] md:rounded-[3rem] shadow-xl hover-card border-l-[12px] border-[#D4AF37] cursor-pointer text-white">
                         <i class="fas fa-chart-pie text-4xl text-[#D4AF37] mb-8"></i>
                         <h3 class="text-2xl font-bold mb-4 italic text-[#D4AF37]">Profit Sharing</h3>
                         <p class="text-sm opacity-70 mb-8">Bagi hasil dari laba operasional (Net Profit) setelah
@@ -420,7 +483,7 @@
                     </div>
 
                     <div onclick="openModal('revenue')"
-                        class="bg-white p-12 rounded-[3rem] shadow-xl hover-card border-l-[12px] border-[#800000] cursor-pointer">
+                        class="bg-white p-8 md:p-12 rounded-[2.5rem] md:rounded-[3rem] shadow-xl hover-card border-l-[12px] border-[#800000] cursor-pointer">
                         <i class="fas fa-money-bill-wave text-4xl text-[#3E2723] mb-8"></i>
                         <h3 class="text-2xl font-bold mb-4 italic">Revenue Sharing</h3>
                         <p class="text-sm text-gray-500 mb-8">Bagi hasil dari pendapatan bruto (Gross Revenue) dikurangi
@@ -431,7 +494,7 @@
                     </div>
 
                     <div onclick="openModal('guaranteed')"
-                        class="bg-[#800000] p-12 rounded-[3rem] shadow-xl hover-card border-l-[12px] border-[#1A1A1A] cursor-pointer text-white">
+                        class="bg-[#800000] p-8 md:p-12 rounded-[2.5rem] md:rounded-[3rem] shadow-xl hover-card border-l-[12px] border-[#1A1A1A] cursor-pointer text-white">
                         <i class="fas fa-handshake-alt text-4xl text-white mb-8"></i>
                         <h3 class="text-2xl font-bold mb-4 italic">Guaranteed Income</h3>
                         <p class="text-sm opacity-90 mb-8 leading-relaxed">Kami menyewa lahan parkir Anda dengan harga
@@ -442,7 +505,7 @@
                     </div>
 
                     <div onclick="openModal('technical')"
-                        class="bg-white p-12 rounded-[3rem] shadow-xl hover-card border-l-[12px] border-[#800000] cursor-pointer">
+                        class="bg-white p-8 md:p-12 rounded-[2.5rem] md:rounded-[3rem] shadow-xl hover-card border-l-[12px] border-[#800000] cursor-pointer">
                         <i class="fas fa-tools text-4xl text-[#3E2723] mb-8"></i>
                         <h3 class="text-2xl font-bold mb-4 italic">Technical Asst.</h3>
                         <p class="text-sm text-gray-500 mb-8 leading-relaxed">Kami bertindak sebagai konsultan
@@ -453,7 +516,7 @@
                     </div>
 
                     <div onclick="openModal('combination')"
-                        class="bg-[#3E2723] p-12 rounded-[3rem] shadow-xl hover-card border-l-[12px] border-[#800000] cursor-pointer text-white">
+                        class="bg-[#3E2723] p-8 md:p-12 rounded-[2.5rem] md:rounded-[3rem] shadow-xl hover-card border-l-[12px] border-[#800000] cursor-pointer text-white">
                         <i class="fas fa-puzzle-piece text-4xl text-[#D4AF37] mb-8"></i>
                         <h3 class="text-2xl font-bold mb-4 italic">Combination Fee</h3>
                         <p class="text-sm opacity-80 mb-8 leading-relaxed">Penggabungan elemen model lainnya untuk
@@ -465,7 +528,7 @@
                 </div>
 
                 <!-- Strategic Features Grid -->
-                <div class="mt-32 p-8 md:p-16 glass rounded-[3rem] md:rounded-[4rem] border-2 border-[#800000]">
+                <div class="mt-32 p-8 md:p-16 glass rounded-[3rem] md:rounded-[4rem] border-2 border-[#800000] reveal">
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 text-center">
                         <div class="space-y-4">
                             <div
@@ -503,76 +566,1189 @@
         <!-- PORTFOLIO SECTION (Full 6 Locations) -->
         <section id="portfolio" class="page-section py-24 px-6 bg-white">
             <div class="max-w-7xl mx-auto">
-                <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+                <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6 reveal">
                     <h2 class="text-4xl md:text-5xl font-serif italic mb-6 leading-tight">Jejak Langkah <br><span
                             class="bg-[#800000] text-white px-3">Operasional</span> Kami.</h2>
                     <span
                         class="text-6xl font-black text-[#F5E6D3] select-none hidden md:block uppercase">Portfolio</span>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                    <div class="group">
-                        <div
-                            class="zoom-container h-[400px] shadow-2xl rounded-[2.5rem] mb-6 border-b-8 border-[#800000]">
-                            <img src="foto/bimoli.jpeg" class="grayscale group-hover:grayscale-0">
+
+                <!-- GRID UTAMA PORTFOLIO -->
+                <div id="portfolio-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 reveal grid-limited">
+                    
+                    <!-- 1. Kawasan Bimoli -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('foto/bimoli.jpeg')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
+                            <img src="foto/bimoli.jpeg" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Kawasan Bimoli">
                             <div class="photo-text">
-                                <h4 class="text-2xl font-black text-white italic">KAWASAN BIMOLI</h4>
-                                <p class="text-xs font-bold text-gray-300">Jakarta Utara</p>
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">KAWASAN BIMOLI</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Jakarta Utara</p>
                             </div>
                         </div>
                     </div>
-                    <div class="group md:mt-12">
-                        <div
-                            class="zoom-container h-[400px] shadow-2xl rounded-[2.5rem] mb-6 border-b-8 border-[#1A1A1A]">
-                            <img src="foto/rs_mery.jpeg" class="grayscale group-hover:grayscale-0">
+
+                    <!-- 2. RS Mary -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('foto/rs_mery.jpeg')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
+                            <img src="foto/rs_mery.jpeg" class="grayscale group-hover:grayscale-0" loading="lazy" alt="RS Mary Cileungsi">
                             <div class="photo-text">
-                                <h4 class="text-2xl font-black text-white italic">RS MARY CILEUNGSI</h4>
-                                <p class="text-xs font-bold text-gray-300">Bogor, Jawa Barat</p>
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">RS MARY CILEUNGSI</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Bogor, Jawa Barat</p>
                             </div>
                         </div>
                     </div>
-                    <div class="group">
-                        <div
-                            class="zoom-container h-[400px] shadow-2xl rounded-[2.5rem] mb-6 border-b-8 border-[#800000]">
-                            <img src="foto/jababeka.jpeg" class="grayscale group-hover:grayscale-0">
+
+                    <!-- 3. Hollywood Junction -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('foto/jababeka.jpeg')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
+                            <img src="foto/jababeka.jpeg" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Hollywood Junction">
                             <div class="photo-text">
-                                <h4 class="text-2xl font-black text-white italic">HOLLYWOOD JUNCTION</h4>
-                                <p class="text-xs font-bold text-gray-300">Cikarang</p>
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">HOLLYWOOD JUNCTION</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Cikarang</p>
                             </div>
                         </div>
                     </div>
-                    <!-- Row 2 Portfolio -->
-                    <div class="group">
-                        <div
-                            class="zoom-container h-[400px] shadow-2xl rounded-[2.5rem] mb-6 border-b-8 border-[#1A1A1A]">
-                            <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800"
-                                class="grayscale group-hover:grayscale-0">
+
+                    <!-- 4. Gading Center -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Gading Center">
                             <div class="photo-text">
-                                <h4 class="text-2xl font-black text-white italic">GADING CENTER</h4>
-                                <p class="text-xs font-bold text-gray-300">Jakarta Utara</p>
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">GADING CENTER</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Jakarta Utara</p>
                             </div>
                         </div>
                     </div>
-                    <div class="group md:mt-12">
-                        <div
-                            class="zoom-container h-[400px] shadow-2xl rounded-[2.5rem] mb-6 border-b-8 border-[#800000]">
-                            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800"
-                                class="grayscale group-hover:grayscale-0">
+
+                    <!-- 6. Siak Logistic -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Siak Logistic Hub">
                             <div class="photo-text">
-                                <h4 class="text-2xl font-black text-white italic">KANTOR CABANG BEKASI</h4>
-                                <p class="text-xs font-bold text-gray-300">Bekasi Town Square</p>
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">SIAK LOGISTIC</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Tanjung Priok</p>
                             </div>
                         </div>
                     </div>
-                    <div class="group">
-                        <div
-                            class="zoom-container h-[400px] shadow-2xl rounded-[2.5rem] mb-6 border-b-8 border-[#1A1A1A]">
-                            <img src="https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800"
-                                class="grayscale group-hover:grayscale-0">
+
+                    <!-- Tambahan 94 item portfolio (total 100) -->
+                    <!-- Anda bisa mengganti src, alt, h4, dan p dengan data proyek asli Anda -->
+                    <!-- Item 7 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 7">
                             <div class="photo-text">
-                                <h4 class="text-2xl font-black text-white italic">SIAK LOGISTIC HUB</h4>
-                                <p class="text-xs font-bold text-gray-300">Tanjung Priok</p>
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 7</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 7</p>
                             </div>
                         </div>
+                    </div>
+                    <!-- Item 8 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 8">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 8</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 8</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 9 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 9">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 9</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 9</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 10 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 10">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 10</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 10</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 11 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 11">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 11</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 11</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 12 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 12">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 12</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 12</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 13 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 13">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 13</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 13</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 14 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 14">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 14</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 14</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 15 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 15">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 15</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 15</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 16 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 16">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 16</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 16</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 17 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 17">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 17</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 17</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 18 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 18">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 18</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 18</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 19 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 19">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 19</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 19</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 20 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 20">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 20</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 20</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 21 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 21">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 21</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 21</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 22 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 22">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 22</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 22</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 23 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 23">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 23</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 23</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 24 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 24">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 24</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 24</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 25 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 25">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 25</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 25</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 26 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 26">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 26</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 26</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 27 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 27">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 27</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 27</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 28 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 28">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 28</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 28</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 29 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 29">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 29</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 29</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 30 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 30">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 30</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 30</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 31 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 31">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 31</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 31</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 32 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 32">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 32</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 32</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 33 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 33">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 33</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 33</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 34 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 34">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 34</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 34</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 35 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 35">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 35</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 35</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 36 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 36">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 36</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 36</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 37 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 37">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 37</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 37</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 38 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 38">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 38</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 38</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 39 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 39">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 39</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 39</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 40 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 40">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 40</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 40</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 41 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 41">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 41</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 41</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 42 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 42">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 42</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 42</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 43 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 43">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 43</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 43</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 44 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 44">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 44</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 44</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 45 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 45">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 45</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 45</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 46 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 46">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 46</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 46</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 47 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 47">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 47</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 47</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 48 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 48">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 48</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 48</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 49 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 49">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 49</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 49</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 50 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 50">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 50</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 50</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 51 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 51">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 51</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 51</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 52 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 52">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 52</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 52</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 53 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 53">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 53</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 53</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 54 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 54">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 54</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 54</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 55 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 55">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 55</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 55</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 56 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 56">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 56</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 56</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 57 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 57">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 57</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 57</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 58 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 58">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 58</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 58</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 59 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 59">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 59</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 59</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 60 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 60">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 60</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 60</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 61 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 61">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 61</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 61</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 62 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 62">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 62</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 62</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 63 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 63">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 63</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 63</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 64 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 64">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 64</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 64</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 65 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 65">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 65</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 65</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 66 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 66">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 66</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 66</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 67 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 67">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 67</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 67</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 68 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 68">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 68</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 68</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 69 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 69">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 69</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 69</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 70 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 70">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 70</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 70</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 71 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 71">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 71</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 71</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 72 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 72">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 72</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 72</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 73 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 73">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 73</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 73</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 74 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 74">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 74</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 74</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 75 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 75">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 75</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 75</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 76 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 76">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 76</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 76</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 77 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 77">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 77</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 77</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 78 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 78">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 78</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 78</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 79 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 79">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 79</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 79</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 80 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 80">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 80</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 80</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 81 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 81">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 81</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 81</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 82 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 82">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 82</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 82</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 83 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 83">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 83</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 83</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 84 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 84">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 84</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 84</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 85 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 85">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 85</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 85</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 86 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 86">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 86</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 86</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 87 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 87">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 87</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 87</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 88 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 88">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 88</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 88</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 89 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 89">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 89</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 89</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 90 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 90">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 90</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 90</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 91 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 91">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 91</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 91</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 92 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 92">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 92</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 92</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 93 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 93">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 93</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 93</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 94 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 94">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 94</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 94</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 95 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 95">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 95</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 95</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 96 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 96">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 96</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 96</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 97 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 97">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 97</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 97</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 98 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 98">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 98</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 98</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 99 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 99">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 99</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 99</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Item 100 -->
+                    <div class="portfolio-item group">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 100">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">PROYEK BARU 100</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Lokasi Proyek 100</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TOMBOL LIHAT SEMUA -->
+                <div class="mt-16 text-center reveal">
+                    <button id="loadMoreBtn" onclick="togglePortfolio()" 
+                        class="bg-transparent border-2 border-[#800000] text-[#800000] px-8 py-3 rounded-full font-bold uppercase text-[10px] tracking-widest hover:bg-[#800000] hover:text-white transition-all shadow-lg">
+                        Lihat Semua Portfolio
+                    </button>
+                </div>
+
+                <!-- FAQ SECTION -->
+                <div class="mt-32 max-w-4xl mx-auto reveal">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl font-serif italic mb-2">Pertanyaan Umum</h2>
+                        <p class="text-xs text-[#800000] font-bold uppercase tracking-widest">FAQ — Informasi Layanan</p>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="border-2 border-[#800000]/10 rounded-2xl overflow-hidden bg-white">
+                            <button onclick="toggleFaq(0)" class="w-full flex justify-between items-center p-6 text-left hover:bg-[#F5E6D3]/30 transition-colors">
+                                <span class="font-bold text-[#3E2723]">Berapa lama waktu pemasangan sistem Smart Gate?</span>
+                                <i class="fas fa-chevron-down text-[#800000] transition-transform duration-300" id="faq-icon-0"></i>
+                            </button>
+                            <div id="faq-ans-0" class="faq-content">
+                                <p class="p-6 pt-0 text-sm text-gray-600 leading-relaxed">Untuk pemasangan standar 2 in & 2 out, biasanya memakan waktu 7-14 hari kerja termasuk integrasi sistem cloud dan training SDM operasional di lokasi.</p>
+                            </div>
+                        </div>
+                        <div class="border-2 border-[#800000]/10 rounded-2xl overflow-hidden bg-white">
+                            <button onclick="toggleFaq(1)" class="w-full flex justify-between items-center p-6 text-left hover:bg-[#F5E6D3]/30 transition-colors">
+                                <span class="font-bold text-[#3E2723]">Apakah sistem RITS mendukung pembayaran non-tunai (Cashless)?</span>
+                                <i class="fas fa-chevron-down text-[#800000] transition-transform duration-300" id="faq-icon-1"></i>
+                            </button>
+                            <div id="faq-ans-1" class="faq-content">
+                                <p class="p-6 pt-0 text-sm text-gray-600 leading-relaxed">Ya, sistem kami sudah terintegrasi dengan berbagai penyedia e-wallet dan kartu uang elektronik (Emoney, Flazz, TapCash, Brizzi) serta QRIS untuk memudahkan pengguna.</p>
+                            </div>
+                        </div>
+                        <div class="border-2 border-[#800000]/10 rounded-2xl overflow-hidden bg-white">
+                            <button onclick="toggleFaq(2)" class="w-full flex justify-between items-center p-6 text-left hover:bg-[#F5E6D3]/30 transition-colors">
+                                <span class="font-bold text-[#3E2723]">Bagaimana jika terjadi kendala teknis di luar jam kantor?</span>
+                                <i class="fas fa-chevron-down text-[#800000] transition-transform duration-300" id="faq-icon-2"></i>
+                            </button>
+                            <div id="faq-ans-2" class="faq-content">
+                                <p class="p-6 pt-0 text-sm text-gray-600 leading-relaxed">Kami menyediakan tim Support 24/7 dan sistem monitoring jarak jauh. Jika kendala tidak bisa diatasi secara remote, teknisi lapangan kami akan segera menuju lokasi.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TESTIMONIALS SECTION -->
+        <section id="testimonials" class="page-section py-24 px-6 bg-[#FCFAEE]">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-16 reveal">
+                    <h2 class="text-3xl md:text-5xl font-serif italic mb-4">Apa Kata Mitra Kami.</h2>
+                    <div class="w-20 h-1 bg-[#800000] mx-auto"></div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 reveal">
+                    <div class="bg-white p-8 rounded-[2rem] shadow-lg border-t-4 border-[#800000]">
+                        <div class="flex text-[#D4AF37] mb-4">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p class="italic text-gray-600 mb-6">"Sistem Manless dari RITS sangat membantu transparansi pendapatan di kawasan pergudangan kami. Laporannya real-time."</p>
+                        <h5 class="font-bold text-[#3E2723]">— Bpk. Hendra, Property Manager</h5>
+                    </div>
+                    <div class="bg-white p-8 rounded-[2rem] shadow-lg border-t-4 border-[#1A1A1A]">
+                        <div class="flex text-[#D4AF37] mb-4">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p class="italic text-gray-600 mb-6">"Respon tim teknis sangat cepat saat ada kendala di lapangan. Sangat profesional dalam menangani parkir Rumah Sakit."</p>
+                        <h5 class="font-bold text-[#3E2723]">— Ibu Maya, Operasional RS</h5>
+                    </div>
+                    <div class="bg-white p-8 rounded-[2rem] shadow-lg border-t-4 border-[#800000]">
+                        <div class="flex text-[#D4AF37] mb-4">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p class="italic text-gray-600 mb-6">"Kerjasama Profit Sharing yang sangat adil. Perangkat yang disediakan selalu dalam kondisi prima dan modern."</p>
+                        <h5 class="font-bold text-[#3E2723]">— Bpk. Rudy, Pemilik Lahan</h5>
                     </div>
                 </div>
             </div>
@@ -581,14 +1757,14 @@
         <!-- CAREER SECTION -->
         <section id="career" class="page-section py-24 px-6 bg-[#3E2723] text-[#F5E6D3]">
             <div class="max-w-7xl mx-auto">
-                <div class="grid lg:grid-cols-2 gap-20 items-center">
+                <div class="grid lg:grid-cols-2 gap-20 items-center reveal">
                     <div>
-                        <h2 class="text-4xl md:text-5xl font-serif italic mb-8">Bergabung Bersama Kami.</h2>
-                        <p class="text-lg opacity-80 leading-relaxed mb-10 italic font-light">"Kami mencari individu
+                    <h2 class="text-3xl md:text-5xl font-serif italic mb-8">Bergabung Bersama Kami.</h2>
+                    <p class="text-base md:text-lg opacity-80 leading-relaxed mb-10 italic font-light">"Kami mencari individu
                             berdedikasi untuk mengisi posisi operasional lapangan maupun kantor pusat."</p>
                         <div class="space-y-4">
-                            <div
-                                class="bg-black/20 p-8 rounded-3xl border border-white/10 flex justify-between items-center group hover:bg-[#800000] transition-all cursor-pointer">
+                            <div 
+                            class="bg-black/20 p-6 md:p-8 rounded-3xl border border-white/10 flex justify-between items-center group hover:bg-[#800000] transition-all cursor-pointer">
                                 <div>
                                     <h4 class="text-xl font-bold italic">Staff Operasional</h4>
                                     <p class="text-xs opacity-60">Jabodetabek</p>
@@ -596,7 +1772,7 @@
                                 <i class="fas fa-arrow-right group-hover:translate-x-3 transition-transform"></i>
                             </div>
                             <div
-                                class="bg-black/20 p-8 rounded-3xl border border-white/10 flex justify-between items-center group hover:bg-[#800000] transition-all cursor-pointer">
+                            class="bg-black/20 p-6 md:p-8 rounded-3xl border border-white/10 flex justify-between items-center group hover:bg-[#800000] transition-all cursor-pointer">
                                 <div>
                                     <h4 class="text-xl font-bold italic">IT Support</h4>
                                     <p class="text-xs opacity-60">Head Office</p>
@@ -607,12 +1783,16 @@
                     </div>
                     <div class="bg-white p-8 md:p-12 rounded-[3rem] text-[#3E2723] shadow-2xl">
                         <h3 class="text-2xl font-black mb-6 uppercase italic">Kirim Lamaran</h3>
-                        <form class="space-y-4">
-                            <input type="text" placeholder="Nama Lengkap"
+                        <form id="careerForm" action="https://formsubmit.co/ajax/MASUKKAN_EMAIL_ASLI_ANDA@gmail.com" method="POST" class="space-y-4">
+                            <!-- Konfigurasi FormSubmit agar rapi -->
+                            <input type="hidden" name="_subject" value="Lamaran Baru - PT RITS NUSA KENARI">
+                            <input type="hidden" name="_template" value="table">
+                            
+                            <input type="text" name="name" placeholder="Nama Lengkap" required
                                 class="w-full bg-[#F5E6D3] rounded-2xl py-4 px-6 border-none focus:ring-2 focus:ring-[#800000]">
-                            <input type="email" placeholder="Email Anda"
+                            <input type="email" name="email" placeholder="Email Anda" required
                                 class="w-full bg-[#F5E6D3] rounded-2xl py-4 px-6 border-none focus:ring-2 focus:ring-[#800000]">
-                            <button type="button"
+                            <button type="submit" id="submitBtn"
                                 class="w-full bg-[#800000] text-white py-4 rounded-2xl font-black uppercase text-xs shadow-xl">Kirim
                                 Sekarang</button>
                         </form>
@@ -624,14 +1804,14 @@
         <!-- CONTACT SECTION -->
         <section id="contact" class="page-section py-24 px-6">
             <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-20">
-                <div>
-                    <h2 class="text-4xl md:text-5xl font-serif italic mb-8">Let's Talk <br><span
+                <div class="reveal">
+                    <h2 class="text-3xl md:text-5xl font-serif italic mb-8">Let's Talk <br><span
                             class="text-[#800000]">Business.</span></h2>
                     <div class="space-y-12">
                         <div class="flex gap-8">
                             <div
-                                class="w-16 h-16 bg-[#800000] text-white rounded-2xl flex items-center justify-center text-2xl shadow-lg">
-                                <i class="fas fa-map-marked-alt"></i>
+                                class="w-12 h-12 md:w-16 md:h-16 bg-[#800000] text-white rounded-2xl flex items-center justify-center text-xl md:text-2xl shadow-lg">
+                                <i class="fas fa-map-marked-alt shrink-0"></i>
                             </div>
                             <div>
                                 <h5 class="font-bold text-lg uppercase">Kantor Pusat</h5>
@@ -640,8 +1820,8 @@
                         </div>
                         <div class="flex gap-8">
                             <div
-                                class="w-16 h-16 bg-[#1A1A1A] text-white rounded-2xl flex items-center justify-center text-2xl shadow-lg">
-                                <i class="fas fa-phone-alt"></i>
+                                class="w-12 h-12 md:w-16 md:h-16 bg-[#1A1A1A] text-white rounded-2xl flex items-center justify-center text-xl md:text-2xl shadow-lg">
+                                <i class="fas fa-phone-alt shrink-0"></i>
                             </div>
                             <div>
                                 <h5 class="font-bold text-lg uppercase">Hubungi Kami</h5>
@@ -650,7 +1830,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="h-[400px] md:h-[500px] rounded-[3rem] overflow-hidden shadow-2xl border-4 border-white">
+                <div class="h-[400px] md:h-[500px] rounded-[3rem] overflow-hidden shadow-2xl border-4 border-white reveal">
                     <iframe
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3967.1030232501655!2d106.9022416!3d-6.116812!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6a1f3377519391%3A0x6a6d6f2c68f9a263!2sGading%20Center!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid"
                         width="100%" height="100%" style="border:0;" loading="lazy"></iframe>
@@ -663,36 +1843,56 @@
     <footer class="bg-[#1A1A1A] text-white pt-24 pb-12 px-6">
         <div class="max-w-7xl mx-auto text-center">
             <div class="flex items-center justify-center gap-4 mb-8">
-                <div class="w-12 h-12 bg-[#800000] rounded-xl flex items-center justify-center font-black">R</div>
+                <div class="w-12 h-12 bg-[#800000] rounded-xl flex items-center justify-center shadow-lg">
+                    <img src="logo.png" alt="RITS" class="w-8 h-8 object-contain">
+                </div>
                 <h4 class="text-2xl font-black tracking-tighter uppercase">PT RITS NUSA KENARI</h4>
             </div>
             <div class="border-t border-white/10 pt-10 text-[10px] text-gray-600 font-bold tracking-[0.4em]">
-                © 2026 PT RITS NUSA KENARI. INTEGRATED MANAGEMENT SYSTEM.
+                <div>© 2026 PT RITS NUSA KENARI. INTEGRATED MANAGEMENT SYSTEM.</div>
+                <div class="mt-4 flex justify-center gap-6 opacity-50 uppercase tracking-widest text-[8px]">
+                    <a href="#" class="hover:text-[#800000] transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-[#800000] transition-colors">Terms of Service</a>
+                </div>
             </div>
         </div>
     </footer>
 
+    <!-- BACK TO TOP -->
+    <button id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
+        class="fixed bottom-24 right-6 z-[60] w-14 h-14 bg-[#1A1A1A] text-white rounded-full flex items-center justify-center text-xl shadow-2xl opacity-0 pointer-events-none transition-all duration-300 hover:bg-[#800000]">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
     <!-- MODAL SYSTEM -->
     <div id="modalOverlay" class="fixed inset-0 bg-black/95 hidden z-[100] flex items-center justify-center p-6"
         onclick="closeModal()">
-        <div class="bg-[#FCFAEE] max-w-2xl w-full rounded-[3rem] p-8 md:p-12 relative shadow-2xl border-t-[12px] border-[#800000]"
+        <div class="bg-[#FCFAEE] max-w-2xl w-full rounded-[2.5rem] md:rounded-[3rem] p-6 md:p-12 relative shadow-2xl border-t-[12px] border-[#800000]"
             onclick="event.stopPropagation()">
             <button onclick="closeModal()"
                 class="absolute top-6 right-8 text-4xl text-[#3E2723] hover:text-[#800000] transition-colors">&times;</button>
             <div id="modalIcon"
-                class="w-20 h-20 bg-[#1A1A1A] rounded-3xl flex items-center justify-center text-[#D4AF37] text-3xl mb-8 shadow-lg">
+                class="w-16 h-16 md:w-20 md:h-20 bg-[#1A1A1A] rounded-3xl flex items-center justify-center text-[#D4AF37] text-2xl md:text-3xl mb-8 shadow-lg">
                 <i class="fas fa-handshake"></i>
             </div>
-            <h2 id="modalTitle" class="text-3xl md:text-4xl font-serif italic text-[#3E2723] mb-6"></h2>
+            <h2 id="modalTitle" class="text-2xl md:text-4xl font-serif italic text-[#3E2723] mb-6"></h2>
             <div
-                class="bg-white p-6 md:p-8 rounded-[2rem] border-l-[10px] border-[#800000] shadow-inner leading-relaxed italic">
+                class="bg-white p-4 md:p-8 rounded-[2rem] border-l-[10px] border-[#800000] shadow-inner leading-relaxed italic text-sm md:text-base">
                 <p id="modalContent"></p>
             </div>
         </div>
     </div>
 
+    <!-- IMAGE LIGHTBOX MODAL -->
+    <div id="imageModal" class="fixed inset-0 bg-black/95 hidden z-[110] flex items-center justify-center p-4 cursor-zoom-out"
+        onclick="closeImageModal()">
+        <button onclick="closeImageModal()"
+            class="absolute top-6 right-8 text-5xl text-white hover:text-[#800000] z-[120] transition-colors">&times;</button>
+        <img id="fullImage" src="" class="max-w-full max-h-full object-contain rounded-lg shadow-2xl" onclick="event.stopPropagation()">
+    </div>
+
     <!-- WHATSAPP -->
-    <a href="https://wa.me/628123456789"
+    <a href="https://wa.me/628123456789" aria-label="Chat WhatsApp"
         class="fixed bottom-6 right-6 z-[60] w-14 h-14 bg-[#25d366] rounded-full flex items-center justify-center text-white text-3xl shadow-2xl hover:scale-110 transition-transform">
         <i class="fab fa-whatsapp"></i>
     </a>
@@ -707,23 +1907,10 @@
             combination: { title: "Combination Fee", desc: "Bentuk kerjasama fleksibel yang menggabungkan elemen model lainnya (Misal: Guaranteed + Profit Sharing) untuk mengoptimalkan keuntungan kedua pihak." }
         };
 
-        function showPage(pageId) {
-            document.querySelectorAll('.page-section').forEach(sec => {
-                sec.classList.remove('active');
-                sec.style.display = 'none';
-            });
-            const target = document.getElementById(pageId);
-            if (target) {
-                target.style.display = 'block';
-                setTimeout(() => target.classList.add('active'), 50);
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-        }
-
         function toggleMenu() {
             const menu = document.getElementById('mobileMenu');
             menu.classList.toggle('open');
-            document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : 'auto';
+            document.body.classList.toggle('menu-open', menu.classList.contains('open'));
         }
 
         function openModal(type) {
@@ -734,11 +1921,133 @@
 
         function closeModal() { document.getElementById('modalOverlay').classList.add('hidden'); }
 
+        // Portfolio Toggle Logic
+        function togglePortfolio() {
+            const grid = document.getElementById('portfolio-grid');
+            const btn = document.getElementById('loadMoreBtn');
+            grid.classList.toggle('grid-limited');
+            btn.innerText = grid.classList.contains('grid-limited') ? 'Lihat Semua Portfolio' : 'Sembunyikan Sebagian';
+        }
+
+        // Image Modal Logic
+        function openImageModal(src) {
+            document.getElementById('fullImage').src = src;
+            document.getElementById('imageModal').classList.remove('hidden');
+            document.body.classList.add('menu-open');
+        }
+
+        function closeImageModal() {
+            document.getElementById('imageModal').classList.add('hidden');
+            document.body.classList.remove('menu-open');
+        }
+
+        function toggleFaq(index) {
+            const content = document.getElementById(`faq-ans-${index}`);
+            const icon = document.getElementById(`faq-icon-${index}`);
+            const allContent = document.querySelectorAll('.faq-content');
+            
+            const isOpen = content.style.maxHeight !== "0px" && content.style.maxHeight !== "";
+            content.style.maxHeight = isOpen ? "0px" : content.scrollHeight + "px";
+            icon.style.transform = isOpen ? "rotate(0deg)" : "rotate(180deg)";
+        }
+
         document.getElementById('menuBtn').onclick = toggleMenu;
         document.getElementById('closeBtn').onclick = toggleMenu;
-        document.addEventListener('keydown', (e) => { if (e.key === "Escape") closeModal(); });
+        document.addEventListener('keydown', (e) => { 
+            if (e.key === "Escape") closeModal(); 
+            if (e.key === "Escape") closeImageModal(); 
+        });
 
-        window.onload = () => showPage('home');
+        // Reveal Animation Logic
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    // Berhenti mengamati setelah elemen muncul agar performa lebih ringan
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        function initScrollAnimations() {
+            document.querySelectorAll('.reveal').forEach(el => {
+                el.classList.remove('visible'); 
+                revealObserver.unobserve(el);
+                revealObserver.observe(el);
+            });
+        }
+
+        // Fungsi Utama Navigasi (showPage)
+        function showPage(pageId, updateHash = true) {
+            const sections = document.querySelectorAll('.page-section');
+            sections.forEach(sec => {
+                sec.classList.remove('active');
+                sec.style.display = 'none';
+            });
+
+            const target = document.getElementById(pageId);
+            if (target) {
+                target.style.display = 'block';
+                // Gunakan requestAnimationFrame untuk memastikan browser sudah merender display:block
+                requestAnimationFrame(() => {
+                    target.classList.add('active');
+                    initScrollAnimations();
+                });
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                
+                if(updateHash) history.pushState(null, null, `#${pageId}`);
+            }
+        }
+
+        window.onpopstate = () => {
+            const page = location.hash.replace('#', '') || 'home';
+            showPage(page, false);
+        };
+
+        window.addEventListener('scroll', () => {
+            const btn = document.getElementById('backToTop');
+            if (window.scrollY > 500) {
+                btn.classList.add('visible');
+            } else {
+                btn.classList.remove('visible');
+            }
+        });
+
+        // Career Form Logic
+        const careerForm = document.getElementById('careerForm');
+        if (careerForm) {
+            careerForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const btn = document.getElementById('submitBtn');
+                const originalText = btn.innerText;
+                
+                btn.innerText = "MENGIRIM...";
+                btn.disabled = true;
+
+                fetch(this.action, {
+                    method: 'POST',
+                    body: new FormData(this),
+                    headers: { 'Accept': 'application/json' }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert("Terima kasih! Lamaran Anda telah berhasil terkirim.");
+                    careerForm.reset();
+                })
+                .catch(error => {
+                    alert("Maaf, terjadi kesalahan. Pastikan Anda menjalankan web ini di server (bukan file lokal).");
+                })
+                .finally(() => {
+                    btn.innerText = originalText;
+                    btn.disabled = false;
+                });
+            });
+        }
+
+        window.onload = () => {
+            const initialPage = location.hash.replace('#', '') || 'home';
+            showPage(initialPage, false);
+        };
     </script>
 </body>
 
