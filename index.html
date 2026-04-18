@@ -9,6 +9,13 @@
     <meta name="keywords" content="parking management, smart gate, facility service, RITS Nusa Kenari, sistem parkir">
     <link rel="icon" type="image/png" href="logo.png">
 
+    <!-- Open Graph / Facebook / WhatsApp -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ritsnusakenari.com/">
+    <meta property="og:title" content="PT RITS NUSA KENARI - Integrated Facility Service">
+    <meta property="og:description" content="Solusi Smart Parking & Manajemen Fasilitas Terpercaya.">
+    <meta property="og:image" content="foto/logo_rits2.JPG">
+
     <!-- Framework & Fonts -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
@@ -160,13 +167,52 @@
         /* Scroll Animation Styles */
         .reveal {
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateY(40px);
+            transition: opacity 1s cubic-bezier(0.22, 1, 0.36, 1), transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: opacity, transform;
         }
 
         .reveal.visible {
             opacity: 1;
             transform: translateY(0);
+        }
+
+        /* Reveal from Sides */
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-100px);
+            transition: opacity 2s cubic-bezier(0.16, 1, 0.3, 1), transform 2s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(100px);
+            transition: opacity 2s cubic-bezier(0.16, 1, 0.3, 1), transform 2s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+
+        .reveal-left.visible, .reveal-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Delay untuk elemen berurutan */
+        .reveal-delay-1 { transition-delay: 0.3s; }
+        .reveal-delay-2 { transition-delay: 0.6s; }
+        .reveal-delay-3 { transition-delay: 0.9s; }
+        .reveal-delay-4 { transition-delay: 1.2s; }
+
+        /* Animasi khusus gambar agar ada efek scale sedikit */
+        .reveal-img {
+            opacity: 0;
+            transform: scale(0.95) translateY(20px);
+            transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+            transition: all 2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-img.visible {
+            opacity: 1;
+            transform: scale(1) translateY(0);
         }
 
         /* FAQ Accordion Transition */
@@ -181,6 +227,21 @@
             opacity: 1;
             pointer-events: auto;
         }
+
+        /* Infinite Partner Scroll */
+        @keyframes infiniteScroll {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+        .partner-track {
+            display: flex;
+            width: max-content;
+            animation: infiniteScroll 40s linear infinite;
+        }
+        .partner-track:hover { animation-play-state: paused; }
+
+        /* Active Navigation Link */
+        .nav-link.active { color: var(--maroon); border-bottom: 2px solid var(--maroon); }
 
         /* Mencegah scroll saat menu mobile terbuka */
         body.menu-open {
@@ -220,7 +281,7 @@
             <div class="flex items-center gap-4 cursor-pointer group" onclick="showPage('home')">
                 <div
                     class="w-10 h-10 md:w-14 md:h-14 bg-[#800000] rounded-xl flex items-center justify-center shadow-lg group-hover:rotate-6 transition-transform">
-                    <img src="foto/logo_rits" alt="RITS" class="w-8 h-8 md:w-10 md:h-10 object-contain">
+                    <img src="foto/logo_rits2.JPG" alt="RITS" class="w-8 h-8 md:w-10 md:h-10 object-contain">
                 </div>
                 <div>
                     <h1 class="font-extrabold text-base md:text-xl leading-none tracking-tighter text-[#3E2723]">RITS NUSA
@@ -234,15 +295,13 @@
             <!-- Desktop Menu -->
             <div
                 class="hidden lg:flex items-center gap-8 font-bold text-[11px] uppercase tracking-widest text-[#3E2723]">
-                <button onclick="showPage('home')"
-                    class="hover:text-[#800000] transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-0.5 after:bg-[#800000] hover:after:w-full after:transition-all">Home</button>
-                <button onclick="showPage('about')" class="hover:text-[#800000] transition-colors">Directors</button>
-                <button onclick="showPage('services')" class="hover:text-[#800000] transition-colors">Services</button>
-                <button onclick="showPage('portfolio')"
-                    class="hover:text-[#800000] transition-colors">Portfolio</button>
-                <button onclick="showPage('career')" class="hover:text-[#800000] transition-colors">Career</button>
+                <button onclick="showPage('home')" class="nav-link hover:text-[#800000] transition-colors">Home</button>
+                <button onclick="showPage('about')" class="nav-link hover:text-[#800000] transition-colors">Directors</button>
+                <button onclick="showPage('services')" class="nav-link hover:text-[#800000] transition-colors">Services</button>
+                <button onclick="showPage('portfolio')" class="nav-link hover:text-[#800000] transition-colors">Portfolio</button>
+                <button onclick="showPage('career')" class="nav-link hover:text-[#800000] transition-colors">Career</button>
                 <button onclick="showPage('contact')"
-                    class="bg-[#800000] text-white px-6 py-2.5 rounded-full hover:bg-black transition-all shadow-md">Get
+                    class="nav-link bg-[#800000] text-white px-6 py-2.5 rounded-full hover:bg-black transition-all shadow-md">Get
                     in Touch</button>
             </div>
 
@@ -276,17 +335,17 @@
                 <div class="absolute inset-0 bg-gradient-to-r from-black to-transparent"></div>
                 <div class="max-w-7xl mx-auto px-6 relative z-10 grid lg:grid-cols-2 gap-12 items-center">
                     <div class="text-center lg:text-left">
-                        <h2
+                        <h2 class="reveal"
                             class="text-[#D4AF37] font-black uppercase tracking-[0.5em] mb-4 text-[10px] md:text-xs animate-bounce">
                             Premium Quality Solution</h2>
-                        <h1 class="text-4xl md:text-8xl font-serif text-white leading-tight mb-8">Elevating <br><span
+                        <h1 class="text-4xl md:text-8xl font-serif text-white leading-tight mb-8 reveal reveal-delay-1">Elevating <br><span
                                 class="italic text-[#D4AF37]">Parking</span> Experience.</h1>
-                        <p class="text-sm md:text-lg text-gray-300 mb-10 max-w-lg mx-auto lg:mx-0">Sistem parkir
+                        <p class="text-sm md:text-lg text-gray-300 mb-10 max-w-lg mx-auto lg:mx-0 reveal reveal-delay-2">Sistem parkir
                             terintegrasi yang menggabungkan transparansi data, keamanan berlapis, dan teknologi Manless
                             terkini.</p>
 
                         <!-- ACTION BUTTONS -->
-                        <div class="flex justify-center lg:justify-start gap-2 md:gap-4">
+                        <div class="flex justify-center lg:justify-start gap-2 md:gap-4 reveal reveal-delay-3">
                             <button onclick="showPage('services')"
                                 class="bg-[#800000] text-white px-6 md:px-10 py-4 md:py-5 rounded-2xl font-black text-[10px] md:text-xs uppercase tracking-widest shadow-2xl hover:scale-105 transition-all">Mulai
                                 Kerjasama</button>
@@ -304,7 +363,7 @@
                         </div>
                     </div>
                     <div class="hidden lg:block">
-                        <div class="zoom-container border-4 border-white/10 animate-float p-2">
+                        <div class="zoom-container border-4 border-white/10 animate-float p-2 reveal-img">
                             <img src="https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=1000" loading="eager"
                                 alt="Smart Gate" class="rounded-[2rem]">
                         </div>
@@ -315,22 +374,22 @@
             <!-- TECH SPECIFICATION GRID -->
             <div class="max-w-7xl mx-auto px-6 -mt-16 relative z-20 pb-20">
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <div class="bg-white p-6 md:p-8 rounded-[2.5rem] shadow-xl border-b-8 border-[#800000] hover-card">
+                    <div class="bg-white p-6 md:p-8 rounded-[2.5rem] shadow-xl border-b-8 border-[#800000] hover-card reveal">
                         <i class="fas fa-barcode text-3xl text-[#800000] mb-6"></i>
                         <h4 class="font-bold text-lg mb-2">Smart Dispenser</h4>
                         <p class="text-xs text-gray-500">Thermal ticket system dengan panduan suara & QR ready.</p>
                     </div>
-                    <div class="bg-white p-6 md:p-8 rounded-[2.5rem] shadow-xl border-b-8 border-[#1a1a1a] hover-card">
+                    <div class="bg-white p-6 md:p-8 rounded-[2.5rem] shadow-xl border-b-8 border-[#1a1a1a] hover-card reveal reveal-delay-1">
                         <i class="fas fa-video text-3xl text-[#800000] mb-6"></i>
                         <h4 class="font-bold text-lg mb-2">AI Surveillance</h4>
                         <p class="text-xs text-gray-500">IP Camera ANPR untuk deteksi plat nomor otomatis 24/7.</p>
                     </div>
-                    <div class="bg-white p-6 md:p-8 rounded-[2.5rem] shadow-xl border-b-8 border-[#800000] hover-card">
+                    <div class="bg-white p-6 md:p-8 rounded-[2.5rem] shadow-xl border-b-8 border-[#800000] hover-card reveal reveal-delay-2">
                         <i class="fas fa-microchip text-3xl text-[#800000] mb-6"></i>
                         <h4 class="font-bold text-lg mb-2">Barrier Gate</h4>
                         <p class="text-xs text-gray-500">High-speed engine 1.8 detik dengan fitur anti-collision.</p>
                     </div>
-                    <div class="bg-white p-6 md:p-8 rounded-[2.5rem] shadow-xl border-b-8 border-[#1a1a1a] hover-card">
+                    <div class="bg-white p-6 md:p-8 rounded-[2.5rem] shadow-xl border-b-8 border-[#1a1a1a] hover-card reveal reveal-delay-3">
                         <i class="fas fa-cloud-upload-alt text-3xl text-[#800000] mb-6"></i>
                         <h4 class="font-bold text-lg mb-2">Cloud Report</h4>
                         <p class="text-xs text-gray-500">Dashboard pendapatan real-time yang dapat diakses via HP.</p>
@@ -343,18 +402,23 @@
                 <div class="max-w-7xl mx-auto px-6">
                     <p class="text-center text-[10px] font-bold uppercase tracking-[0.4em] text-gray-400 mb-10">Trusted by Leading Industries</p>
                     
-                    <!-- Container Geser (Scrollable) -->
-                    <div class="flex overflow-x-auto no-scrollbar items-center gap-16 md:gap-24 opacity-40 grayscale hover:grayscale-0 transition-all duration-500 pb-4 cursor-grab active:cursor-grabbing">
-                        <!-- Untuk menambah mitra, cukup copy-paste tag <img> di bawah ini -->
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b2/Pertamina_Logo.svg" alt="Pertamina" class="h-8 md:h-12 w-auto object-contain flex-shrink-0">
-                        <img src="https://upload.wikimedia.org/wikipedia/id/8/86/Jababeka_Logo.png" alt="Jababeka" class="h-8 md:h-12 w-auto object-contain flex-shrink-0">
-                        <img src="https://upload.wikimedia.org/wikipedia/id/thumb/0/03/Pelindo_2021.svg/1200px-Pelindo_2021.svg.png" alt="Pelindo" class="h-8 md:h-12 w-auto object-contain flex-shrink-0">
-                        <img src="https://upload.wikimedia.org/wikipedia/id/thumb/a/a2/Sinar_Mas_Group_Logo.svg/1200px-Sinar_Mas_Group_Logo.svg.png" alt="Sinar Mas" class="h-8 md:h-12 w-auto object-contain flex-shrink-0">
-                        <img src="https://upload.wikimedia.org/wikipedia/id/thumb/2/23/Logo_Ciputra.svg/1200px-Logo_Ciputra.svg.png" alt="Ciputra" class="h-8 md:h-12 w-auto object-contain flex-shrink-0">
-                        
-                        <!-- Placeholder tambahan untuk simulasi geser -->
-                        <div class="h-8 md:h-12 flex items-center font-black text-2xl text-gray-300 flex-shrink-0 italic tracking-tighter">PROJECT_ALPHA</div>
-                        <div class="h-8 md:h-12 flex items-center font-black text-2xl text-gray-300 flex-shrink-0 italic tracking-tighter">PROJECT_BETA</div>
+                    <!-- Infinite Auto Scroll Logic -->
+                    <div class="overflow-hidden relative">
+                        <div class="partner-track items-center gap-16 md:gap-32">
+                            <!-- Set 1 -->
+                            <img src="foto/dishub.jpeg" alt="DUSHUB" class="h-8 md:h-12 w-auto object-contain grayscale hover:grayscale-0 transition-all">
+                            <img src="foto/rs_mery_logo.webp" alt="RS MERY" class="h-8 md:h-12 w-auto object-contain grayscale hover:grayscale-0 transition-all">
+                            <img src="https://upload.wikimedia.org/wikipedia/id/thumb/0/03/Pelindo_2021.svg/1200px-Pelindo_2021.svg.png" alt="Pelindo" class="h-8 md:h-12 w-auto object-contain grayscale hover:grayscale-0 transition-all">
+                            <img src="https://upload.wikimedia.org/wikipedia/id/thumb/a/a2/Sinar_Mas_Group_Logo.svg/1200px-Sinar_Mas_Group_Logo.svg.png" alt="Sinar Mas" class="h-8 md:h-12 w-auto object-contain grayscale hover:grayscale-0 transition-all">
+                            <img src="https://upload.wikimedia.org/wikipedia/id/thumb/2/23/Logo_Ciputra.svg/1200px-Logo_Ciputra.svg.png" alt="Ciputra" class="h-8 md:h-12 w-auto object-contain grayscale hover:grayscale-0 transition-all">
+                            
+                            <!-- Set 2 (Duplicate for seamless loop) -->
+                            <img src="foto/dishub.jpeg" alt="DUSHUB" class="h-8 md:h-12 w-auto object-contain grayscale hover:grayscale-0 transition-all">
+                            <img src="foto/rs_mery_logo.webp" alt="RS MERY" class="h-8 md:h-12 w-auto object-contain grayscale hover:grayscale-0 transition-all">
+                            <img src="https://upload.wikimedia.org/wikipedia/id/thumb/0/03/Pelindo_2021.svg/1200px-Pelindo_2021.svg.png" alt="Pelindo" class="h-8 md:h-12 w-auto object-contain grayscale hover:grayscale-0 transition-all">
+                            <img src="https://upload.wikimedia.org/wikipedia/id/thumb/a/a2/Sinar_Mas_Group_Logo.svg/1200px-Sinar_Mas_Group_Logo.svg.png" alt="Sinar Mas" class="h-8 md:h-12 w-auto object-contain grayscale hover:grayscale-0 transition-all">
+                            <img src="https://upload.wikimedia.org/wikipedia/id/thumb/2/23/Logo_Ciputra.svg/1200px-Logo_Ciputra.svg.png" alt="Ciputra" class="h-8 md:h-12 w-auto object-contain grayscale hover:grayscale-0 transition-all">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -365,11 +429,11 @@
             <div class="max-w-7xl mx-auto">
                 <div class="flex flex-col lg:flex-row gap-20 mb-32 items-center reveal">
                     <div class="lg:w-1/2">
-                        <span class="text-[#800000] font-black uppercase tracking-widest text-xs">Visi Kami</span>
-                        <h2 class="text-3xl md:text-5xl font-serif mt-4 mb-8 leading-tight italic">Menjadi Pemimpin
+                        <span class="text-[#800000] font-black uppercase tracking-widest text-xs reveal">Visi Kami</span>
+                        <h2 class="text-3xl md:text-5xl font-serif mt-4 mb-8 leading-tight italic reveal reveal-delay-1">Menjadi Pemimpin
                             Dalam <span class="bg-[#800000] text-white px-4 not-italic">Integrated</span> Facility
                             Service.</h2>
-                        <div class="space-y-6 text-[#4E342E] leading-relaxed">
+                        <div class="space-y-6 text-[#4E342E] leading-relaxed reveal reveal-delay-2">
                             <p>PT RITS NUSA KENARI didirikan dengan misi membawa standar baru dalam manajemen properti.
                                 Kami percaya bahwa lahan parkir adalah aset strategis yang memerlukan pengelolaan
                                 cerdas.</p>
@@ -381,21 +445,21 @@
                     </div>
                     <div class="lg:w-1/2 grid grid-cols-2 gap-4">
                         <div class="space-y-4 pt-12">
-                            <div class="zoom-container h-48 md:h-64"><img
+                            <div class="zoom-container h-48 md:h-64 reveal-img"><img
                                     src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=400" loading="lazy" alt="Office"></div>
-                            <div class="bg-[#3E2723] p-8 rounded-3xl text-white text-center">
-                                <h5 class="text-2xl md:text-3xl font-bold">10+</h5>
+                            <div class="bg-[#3E2723] p-8 rounded-3xl text-white text-center reveal reveal-delay-1 hover:scale-105 transition-transform">
+                                <h5 class="text-2xl md:text-3xl font-bold stat-number" data-target="10">0</h5>
                                 <p class="text-[8px] md:text-[10px] uppercase font-bold tracking-widest">Tahun
                                     Pengalaman</p>
                             </div>
                         </div>
                         <div class="space-y-4">
-                            <div class="bg-[#800000] p-8 rounded-3xl text-white text-center">
-                                <h5 class="text-2xl md:text-3xl font-bold">50+</h5>
+                            <div class="bg-[#800000] p-8 rounded-3xl text-white text-center reveal reveal-delay-2 hover:scale-105 transition-transform">
+                                <h5 class="text-2xl md:text-3xl font-bold stat-number" data-target="50">0</h5>
                                 <p class="text-[8px] md:text-[10px] uppercase font-bold tracking-widest">Profesional
                                     Staff</p>
                             </div>
-                            <div class="zoom-container h-64 md:h-80"><img
+                            <div class="zoom-container h-64 md:h-80 reveal-img reveal-delay-3"><img
                                     src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=400" loading="lazy" alt="Building"></div>
                         </div>
                     </div>
@@ -406,8 +470,8 @@
                     <div class="w-24 h-1.5 bg-[#800000] mx-auto rounded-full"></div>
                 </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 reveal">
-                    <div class="group text-center">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+                    <div class="group text-center reveal-left">
                         <div
                             class="zoom-container h-96 mb-6 shadow-2xl border-b-8 border-transparent group-hover:border-[#800000]">
                             <img src="foto/ruben.jpeg" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Ruben Etidena">
@@ -417,7 +481,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="group text-center lg:-mt-12">
+                    <div class="group text-center lg:-mt-12 reveal-right reveal-delay-1">
                         <div
                             class="zoom-container h-[450px] mb-6 shadow-2xl border-b-8 border-transparent group-hover:border-[#800000]">
                             <img src="foto/john.jpeg" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Jhon Sius Langkola">
@@ -427,7 +491,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="group text-center">
+                    <div class="group text-center reveal-left reveal-delay-2">
                         <div
                             class="zoom-container h-96 mb-6 shadow-2xl border-b-8 border-transparent group-hover:border-[#800000]">
                             <img src="foto/tius.jpeg" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Ignatius Etidena">
@@ -437,7 +501,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="group text-center lg:-mt-12">
+                    <div class="group text-center lg:-mt-12 reveal-right reveal-delay-3">
                         <div
                             class="zoom-container h-[450px] mb-6 shadow-2xl border-b-8 border-transparent group-hover:border-[#800000]">
                             <img src="foto/toni.jpeg" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Tony BBH">
@@ -527,6 +591,36 @@
                     </div>
                 </div>
 
+                <!-- SECTION: PROSES KERJA -->
+                <div class="mt-32 reveal">
+                    <div class="text-center mb-16">
+                        <h2 class="text-3xl font-serif italic">4 Langkah Menuju Efisiensi</h2>
+                        <p class="text-xs text-[#800000] font-bold uppercase tracking-widest mt-2">Alur Kerja Kami</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                        <div class="text-center space-y-4">
+                            <div class="text-4xl font-serif italic text-[#800000]/20">01</div>
+                            <h5 class="font-bold uppercase tracking-tighter">Site Survey</h5>
+                            <p class="text-xs text-gray-500">Analisis kebutuhan lahan dan arus lalu lintas kendaraan.</p>
+                        </div>
+                        <div class="text-center space-y-4">
+                            <div class="text-4xl font-serif italic text-[#800000]/20">02</div>
+                            <h5 class="font-bold uppercase tracking-tighter">Strategic Proposal</h5>
+                            <p class="text-xs text-gray-500">Penawaran model kerjasama dan spesifikasi teknis.</p>
+                        </div>
+                        <div class="text-center space-y-4">
+                            <div class="text-4xl font-serif italic text-[#800000]/20">03</div>
+                            <h5 class="font-bold uppercase tracking-tighter">Implementation</h5>
+                            <p class="text-xs text-gray-500">Pemasangan perangkat hardware dan integrasi sistem cloud.</p>
+                        </div>
+                        <div class="text-center space-y-4">
+                            <div class="text-4xl font-serif italic text-[#800000]/20">04</div>
+                            <h5 class="font-bold uppercase tracking-tighter">Live & Support</h5>
+                            <p class="text-xs text-gray-500">Operasional penuh dengan dukungan teknis 24/7.</p>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Strategic Features Grid -->
                 <div class="mt-32 p-8 md:p-16 glass rounded-[3rem] md:rounded-[4rem] border-2 border-[#800000] reveal">
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 text-center">
@@ -574,10 +668,10 @@
                 </div>
 
                 <!-- GRID UTAMA PORTFOLIO -->
-                <div id="portfolio-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 reveal grid-limited">
+                <div id="portfolio-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 grid-limited">
                     
                     <!-- 1. Kawasan Bimoli -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('foto/bimoli.jpeg')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
                             <img src="foto/bimoli.jpeg" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Kawasan Bimoli">
@@ -589,7 +683,7 @@
                     </div>
 
                     <!-- 2. RS Mary -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left reveal-delay-1">
                         <div onclick="openImageModal('foto/rs_mery.jpeg')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
                             <img src="foto/rs_mery.jpeg" class="grayscale group-hover:grayscale-0" loading="lazy" alt="RS Mary Cileungsi">
@@ -601,7 +695,7 @@
                     </div>
 
                     <!-- 3. Hollywood Junction -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left reveal-delay-2">
                         <div onclick="openImageModal('foto/jababeka.jpeg')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
                             <img src="foto/jababeka.jpeg" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Hollywood Junction">
@@ -613,7 +707,7 @@
                     </div>
 
                     <!-- 4. Gading Center -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left reveal-delay-3">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Gading Center">
@@ -625,7 +719,7 @@
                     </div>
 
                     <!-- 6. Siak Logistic -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left reveal-delay-4">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Siak Logistic Hub">
@@ -639,7 +733,7 @@
                     <!-- Tambahan 94 item portfolio (total 100) -->
                     <!-- Anda bisa mengganti src, alt, h4, dan p dengan data proyek asli Anda -->
                     <!-- Item 7 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 7">
@@ -650,7 +744,7 @@
                         </div>
                     </div>
                     <!-- Item 8 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 8">
@@ -661,7 +755,7 @@
                         </div>
                     </div>
                     <!-- Item 9 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 9">
@@ -672,7 +766,7 @@
                         </div>
                     </div>
                     <!-- Item 10 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 10">
@@ -683,7 +777,7 @@
                         </div>
                     </div>
                     <!-- Item 11 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 11">
@@ -694,7 +788,7 @@
                         </div>
                     </div>
                     <!-- Item 12 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 12">
@@ -705,7 +799,7 @@
                         </div>
                     </div>
                     <!-- Item 13 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 13">
@@ -716,7 +810,7 @@
                         </div>
                     </div>
                     <!-- Item 14 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 14">
@@ -727,7 +821,7 @@
                         </div>
                     </div>
                     <!-- Item 15 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 15">
@@ -738,7 +832,7 @@
                         </div>
                     </div>
                     <!-- Item 16 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 16">
@@ -749,7 +843,7 @@
                         </div>
                     </div>
                     <!-- Item 17 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 17">
@@ -760,7 +854,7 @@
                         </div>
                     </div>
                     <!-- Item 18 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 18">
@@ -771,7 +865,7 @@
                         </div>
                     </div>
                     <!-- Item 19 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 19">
@@ -782,7 +876,7 @@
                         </div>
                     </div>
                     <!-- Item 20 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 20">
@@ -793,7 +887,7 @@
                         </div>
                     </div>
                     <!-- Item 21 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 21">
@@ -804,7 +898,7 @@
                         </div>
                     </div>
                     <!-- Item 22 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 22">
@@ -815,7 +909,7 @@
                         </div>
                     </div>
                     <!-- Item 23 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 23">
@@ -826,7 +920,7 @@
                         </div>
                     </div>
                     <!-- Item 24 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 24">
@@ -837,7 +931,7 @@
                         </div>
                     </div>
                     <!-- Item 25 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 25">
@@ -848,7 +942,7 @@
                         </div>
                     </div>
                     <!-- Item 26 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 26">
@@ -859,7 +953,7 @@
                         </div>
                     </div>
                     <!-- Item 27 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 27">
@@ -870,7 +964,7 @@
                         </div>
                     </div>
                     <!-- Item 28 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 28">
@@ -881,7 +975,7 @@
                         </div>
                     </div>
                     <!-- Item 29 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 29">
@@ -892,7 +986,7 @@
                         </div>
                     </div>
                     <!-- Item 30 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 30">
@@ -903,7 +997,7 @@
                         </div>
                     </div>
                     <!-- Item 31 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 31">
@@ -914,7 +1008,7 @@
                         </div>
                     </div>
                     <!-- Item 32 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 32">
@@ -925,7 +1019,7 @@
                         </div>
                     </div>
                     <!-- Item 33 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 33">
@@ -936,7 +1030,7 @@
                         </div>
                     </div>
                     <!-- Item 34 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 34">
@@ -947,7 +1041,7 @@
                         </div>
                     </div>
                     <!-- Item 35 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 35">
@@ -958,7 +1052,7 @@
                         </div>
                     </div>
                     <!-- Item 36 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 36">
@@ -969,7 +1063,7 @@
                         </div>
                     </div>
                     <!-- Item 37 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 37">
@@ -980,7 +1074,7 @@
                         </div>
                     </div>
                     <!-- Item 38 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 38">
@@ -991,7 +1085,7 @@
                         </div>
                     </div>
                     <!-- Item 39 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 39">
@@ -1002,7 +1096,7 @@
                         </div>
                     </div>
                     <!-- Item 40 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 40">
@@ -1013,7 +1107,7 @@
                         </div>
                     </div>
                     <!-- Item 41 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 41">
@@ -1024,7 +1118,7 @@
                         </div>
                     </div>
                     <!-- Item 42 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 42">
@@ -1035,7 +1129,7 @@
                         </div>
                     </div>
                     <!-- Item 43 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 43">
@@ -1046,7 +1140,7 @@
                         </div>
                     </div>
                     <!-- Item 44 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 44">
@@ -1057,7 +1151,7 @@
                         </div>
                     </div>
                     <!-- Item 45 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 45">
@@ -1068,7 +1162,7 @@
                         </div>
                     </div>
                     <!-- Item 46 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 46">
@@ -1079,7 +1173,7 @@
                         </div>
                     </div>
                     <!-- Item 47 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 47">
@@ -1090,7 +1184,7 @@
                         </div>
                     </div>
                     <!-- Item 48 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 48">
@@ -1101,7 +1195,7 @@
                         </div>
                     </div>
                     <!-- Item 49 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 49">
@@ -1112,7 +1206,7 @@
                         </div>
                     </div>
                     <!-- Item 50 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 50">
@@ -1123,7 +1217,7 @@
                         </div>
                     </div>
                     <!-- Item 51 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 51">
@@ -1134,7 +1228,7 @@
                         </div>
                     </div>
                     <!-- Item 52 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 52">
@@ -1145,7 +1239,7 @@
                         </div>
                     </div>
                     <!-- Item 53 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 53">
@@ -1156,7 +1250,7 @@
                         </div>
                     </div>
                     <!-- Item 54 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 54">
@@ -1167,7 +1261,7 @@
                         </div>
                     </div>
                     <!-- Item 55 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 55">
@@ -1178,7 +1272,7 @@
                         </div>
                     </div>
                     <!-- Item 56 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 56">
@@ -1189,7 +1283,7 @@
                         </div>
                     </div>
                     <!-- Item 57 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 57">
@@ -1200,7 +1294,7 @@
                         </div>
                     </div>
                     <!-- Item 58 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 58">
@@ -1211,7 +1305,7 @@
                         </div>
                     </div>
                     <!-- Item 59 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 59">
@@ -1222,7 +1316,7 @@
                         </div>
                     </div>
                     <!-- Item 60 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 60">
@@ -1233,7 +1327,7 @@
                         </div>
                     </div>
                     <!-- Item 61 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 61">
@@ -1244,7 +1338,7 @@
                         </div>
                     </div>
                     <!-- Item 62 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 62">
@@ -1255,7 +1349,7 @@
                         </div>
                     </div>
                     <!-- Item 63 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 63">
@@ -1266,7 +1360,7 @@
                         </div>
                     </div>
                     <!-- Item 64 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 64">
@@ -1277,7 +1371,7 @@
                         </div>
                     </div>
                     <!-- Item 65 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 65">
@@ -1288,7 +1382,7 @@
                         </div>
                     </div>
                     <!-- Item 66 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 66">
@@ -1299,7 +1393,7 @@
                         </div>
                     </div>
                     <!-- Item 67 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 67">
@@ -1310,7 +1404,7 @@
                         </div>
                     </div>
                     <!-- Item 68 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 68">
@@ -1321,7 +1415,7 @@
                         </div>
                     </div>
                     <!-- Item 69 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 69">
@@ -1332,7 +1426,7 @@
                         </div>
                     </div>
                     <!-- Item 70 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 70">
@@ -1343,7 +1437,7 @@
                         </div>
                     </div>
                     <!-- Item 71 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 71">
@@ -1354,7 +1448,7 @@
                         </div>
                     </div>
                     <!-- Item 72 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 72">
@@ -1365,7 +1459,7 @@
                         </div>
                     </div>
                     <!-- Item 73 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 73">
@@ -1376,7 +1470,7 @@
                         </div>
                     </div>
                     <!-- Item 74 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 74">
@@ -1387,7 +1481,7 @@
                         </div>
                     </div>
                     <!-- Item 75 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 75">
@@ -1398,7 +1492,7 @@
                         </div>
                     </div>
                     <!-- Item 76 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 76">
@@ -1409,7 +1503,7 @@
                         </div>
                     </div>
                     <!-- Item 77 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 77">
@@ -1420,7 +1514,7 @@
                         </div>
                     </div>
                     <!-- Item 78 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 78">
@@ -1431,7 +1525,7 @@
                         </div>
                     </div>
                     <!-- Item 79 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 79">
@@ -1442,7 +1536,7 @@
                         </div>
                     </div>
                     <!-- Item 80 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 80">
@@ -1453,7 +1547,7 @@
                         </div>
                     </div>
                     <!-- Item 81 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 81">
@@ -1464,7 +1558,7 @@
                         </div>
                     </div>
                     <!-- Item 82 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 82">
@@ -1475,7 +1569,7 @@
                         </div>
                     </div>
                     <!-- Item 83 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 83">
@@ -1486,7 +1580,7 @@
                         </div>
                     </div>
                     <!-- Item 84 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 84">
@@ -1497,7 +1591,7 @@
                         </div>
                     </div>
                     <!-- Item 85 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 85">
@@ -1508,7 +1602,7 @@
                         </div>
                     </div>
                     <!-- Item 86 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 86">
@@ -1519,7 +1613,7 @@
                         </div>
                     </div>
                     <!-- Item 87 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 87">
@@ -1530,7 +1624,7 @@
                         </div>
                     </div>
                     <!-- Item 88 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 88">
@@ -1541,7 +1635,7 @@
                         </div>
                     </div>
                     <!-- Item 89 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 89">
@@ -1552,7 +1646,7 @@
                         </div>
                     </div>
                     <!-- Item 90 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 90">
@@ -1563,7 +1657,7 @@
                         </div>
                     </div>
                     <!-- Item 91 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 91">
@@ -1574,7 +1668,7 @@
                         </div>
                     </div>
                     <!-- Item 92 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 92">
@@ -1585,7 +1679,7 @@
                         </div>
                     </div>
                     <!-- Item 93 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 93">
@@ -1596,7 +1690,7 @@
                         </div>
                     </div>
                     <!-- Item 94 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 94">
@@ -1607,7 +1701,7 @@
                         </div>
                     </div>
                     <!-- Item 95 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 95">
@@ -1618,7 +1712,7 @@
                         </div>
                     </div>
                     <!-- Item 96 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 96">
@@ -1629,7 +1723,7 @@
                         </div>
                     </div>
                     <!-- Item 97 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1582139329536-e7284fece509?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 97">
@@ -1640,7 +1734,7 @@
                         </div>
                     </div>
                     <!-- Item 98 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1506521781263-d8422e82f27a?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 98">
@@ -1651,7 +1745,7 @@
                         </div>
                     </div>
                     <!-- Item 99 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#1A1A1A] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 99">
@@ -1662,7 +1756,7 @@
                         </div>
                     </div>
                     <!-- Item 100 -->
-                    <div class="portfolio-item group">
+                    <div class="portfolio-item group reveal-left">
                         <div onclick="openImageModal('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800')"
                             class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
                             <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Project 100">
@@ -1844,9 +1938,15 @@
         <div class="max-w-7xl mx-auto text-center">
             <div class="flex items-center justify-center gap-4 mb-8">
                 <div class="w-12 h-12 bg-[#800000] rounded-xl flex items-center justify-center shadow-lg">
-                    <img src="logo.png" alt="RITS" class="w-8 h-8 object-contain">
+                    <img src="foto/logo_rits2.JPG" alt="RITS" class="w-8 h-8 object-contain">
                 </div>
                 <h4 class="text-2xl font-black tracking-tighter uppercase">PT RITS NUSA KENARI</h4>
+            </div>
+            <!-- SOCIAL MEDIA LINKS -->
+            <div class="flex justify-center gap-6 mb-10">
+                <a href="#" class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-[#800000] transition-all"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-[#800000] transition-all"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-[#800000] transition-all"><i class="fab fa-facebook-f"></i></a>
             </div>
             <div class="border-t border-white/10 pt-10 text-[10px] text-gray-600 font-bold tracking-[0.4em]">
                 <div>© 2026 PT RITS NUSA KENARI. INTEGRATED MANAGEMENT SYSTEM.</div>
@@ -1927,6 +2027,7 @@
             const btn = document.getElementById('loadMoreBtn');
             grid.classList.toggle('grid-limited');
             btn.innerText = grid.classList.contains('grid-limited') ? 'Lihat Semua Portfolio' : 'Sembunyikan Sebagian';
+            initScrollAnimations();
         }
 
         // Image Modal Logic
@@ -1951,30 +2052,55 @@
             icon.style.transform = isOpen ? "rotate(0deg)" : "rotate(180deg)";
         }
 
+        // Animated Counter Logic
+        const countObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const target = parseInt(entry.target.getAttribute('data-target'));
+                    let current = 0;
+                    const increment = target / 50; 
+                    const timer = setInterval(() => {
+                        current += increment;
+                        entry.target.innerText = Math.floor(current) + "+";
+                        if (current >= target) {
+                            entry.target.innerText = target + "+";
+                            clearInterval(timer);
+                        }
+                    }, 30);
+                    countObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
         document.getElementById('menuBtn').onclick = toggleMenu;
         document.getElementById('closeBtn').onclick = toggleMenu;
         document.addEventListener('keydown', (e) => { 
-            if (e.key === "Escape") closeModal(); 
-            if (e.key === "Escape") closeImageModal(); 
+            if (e.key === "Escape") { closeModal(); closeImageModal(); }
         });
 
         // Reveal Animation Logic
-        const revealObserver = new IntersectionObserver((entries) => {
+        const revealObserver = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
-                    // Berhenti mengamati setelah elemen muncul agar performa lebih ringan
+                    // Tetap mengamati jika ingin animasi berulang, tapi biasanya unobserve lebih baik untuk performa
                     revealObserver.unobserve(entry.target);
                 }
             });
         }, { threshold: 0.1 });
 
         function initScrollAnimations() {
-            document.querySelectorAll('.reveal').forEach(el => {
+            document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => {
                 el.classList.remove('visible'); 
                 revealObserver.unobserve(el);
                 revealObserver.observe(el);
             });
+            document.querySelectorAll('.reveal-img').forEach(el => {
+                el.classList.remove('visible'); 
+                revealObserver.unobserve(el);
+                revealObserver.observe(el);
+            });
+            document.querySelectorAll('.stat-number').forEach(el => countObserver.observe(el));
         }
 
         // Fungsi Utama Navigasi (showPage)
@@ -2051,4 +2177,4 @@
     </script>
 </body>
 
-</html>
+</html> 
