@@ -240,8 +240,14 @@
         }
         .partner-track:hover { animation-play-state: paused; }
 
+        /* Enhanced Navigation Styles */
+        .nav-link {
+            transition: all 0.3s ease;
+            position: relative;
+        }
         /* Active Navigation Link */
-        .nav-link.active { color: var(--maroon); border-bottom: 2px solid var(--maroon); }
+        .nav-link.active { color: var(--maroon); }
+        .nav-link.active::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 100%; height: 2px; background: var(--maroon); }
 
         /* Mencegah scroll saat menu mobile terbuka */
         body.menu-open {
@@ -294,14 +300,14 @@
 
             <!-- Desktop Menu -->
             <div
-                class="hidden lg:flex items-center gap-8 font-bold text-[11px] uppercase tracking-widest text-[#3E2723]">
-                <button onclick="showPage('home')" class="nav-link hover:text-[#800000] transition-colors">Home</button>
-                <button onclick="showPage('about')" class="nav-link hover:text-[#800000] transition-colors">Directors</button>
-                <button onclick="showPage('services')" class="nav-link hover:text-[#800000] transition-colors">Services</button>
-                <button onclick="showPage('portfolio')" class="nav-link hover:text-[#800000] transition-colors">Portfolio</button>
-                <button onclick="showPage('career')" class="nav-link hover:text-[#800000] transition-colors">Career</button>
-                <button onclick="showPage('contact')"
-                    class="nav-link bg-[#800000] text-white px-6 py-2.5 rounded-full hover:bg-black transition-all shadow-md">Get
+                class="hidden lg:flex items-center gap-8 font-bold text-[11px] uppercase tracking-widest text-[#3E2723]" id="desktopMenu">
+                <button onclick="showPage('home')" class="nav-link hover:text-[#800000] active">Home</button>
+                <button onclick="showPage('about')" class="nav-link hover:text-[#800000]">Directors</button>
+                <button onclick="showPage('services')" class="nav-link hover:text-[#800000]">Services</button>
+                <button onclick="showPage('portfolio')" class="nav-link hover:text-[#800000]">Portfolio</button>
+                <button onclick="showPage('career')" class="nav-link hover:text-[#800000]">Career</button>
+                <button onclick="showPage('contact')" 
+                    class="nav-link bg-[#800000] text-white px-6 py-2.5 rounded-full hover:bg-black transition-all shadow-md !border-none after:hidden">Get
                     in Touch</button>
             </div>
 
@@ -346,9 +352,9 @@
 
                         <!-- ACTION BUTTONS -->
                         <div class="flex justify-center lg:justify-start gap-2 md:gap-4 reveal reveal-delay-3">
-                            <button onclick="showPage('services')"
-                                class="bg-[#800000] text-white px-6 md:px-10 py-4 md:py-5 rounded-2xl font-black text-[10px] md:text-xs uppercase tracking-widest shadow-2xl hover:scale-105 transition-all">Mulai
-                                Kerjasama</button>
+                            <a href="https://wa.me/628XXXXXXXXXX?text=Halo%20PT%20RITS%20NUSA%20KENARI,%20saya%20tertarik%20untuk%20mulai%20kerjasama." target="_blank"
+                                class="bg-[#800000] text-white px-6 md:px-10 py-4 md:py-5 rounded-2xl font-black text-[10px] md:text-xs uppercase tracking-widest shadow-2xl hover:scale-105 transition-all flex items-center justify-center text-center">Mulai
+                                Kerjasama</a>
 
                             <!-- FITUR BARU: DOWNLOAD COM-PRO -->
                             <a href="files/company-profile.pdf" download
@@ -714,6 +720,18 @@
                             <div class="photo-text">
                                 <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">GADING CENTER</h4>
                                 <p class="text-[8px] md:text-xs font-bold text-gray-300">Jakarta Utara</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 5. Siak Port (Sesuai Urutan yang Hilang) -->
+                    <div class="portfolio-item group reveal-left">
+                        <div onclick="openImageModal('https://images.unsplash.com/photo-1524522173746-f628baad3644?q=80&w=800')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 border-[#800000] cursor-pointer overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1524522173746-f628baad3644?q=80&w=800" class="grayscale group-hover:grayscale-0" loading="lazy" alt="Siak Port Area">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">SIAK PORT AREA</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">Tanjung Priok</p>
                             </div>
                         </div>
                     </div>
@@ -1766,6 +1784,7 @@
                             </div>
                         </div>
                     </div>
+                    <!-- Items will be generated automatically by JavaScript -->
                 </div>
 
                 <!-- TOMBOL LIHAT SEMUA -->
@@ -1877,7 +1896,7 @@
                     </div>
                     <div class="bg-white p-8 md:p-12 rounded-[3rem] text-[#3E2723] shadow-2xl">
                         <h3 class="text-2xl font-black mb-6 uppercase italic">Kirim Lamaran</h3>
-                        <form id="careerForm" action="https://formsubmit.co/ajax/MASUKKAN_EMAIL_ASLI_ANDA@gmail.com" method="POST" class="space-y-4">
+                        <form id="careerForm" action="https://formsubmit.co/ajax/your-real-email@domain.com" method="POST" class="space-y-4">
                             <!-- Konfigurasi FormSubmit agar rapi -->
                             <input type="hidden" name="_subject" value="Lamaran Baru - PT RITS NUSA KENARI">
                             <input type="hidden" name="_template" value="table">
@@ -1886,6 +1905,21 @@
                                 class="w-full bg-[#F5E6D3] rounded-2xl py-4 px-6 border-none focus:ring-2 focus:ring-[#800000]">
                             <input type="email" name="email" placeholder="Email Anda" required
                                 class="w-full bg-[#F5E6D3] rounded-2xl py-4 px-6 border-none focus:ring-2 focus:ring-[#800000]">
+                            <input type="tel" name="phone" placeholder="Nomor Telepon (WhatsApp)" required
+                                class="w-full bg-[#F5E6D3] rounded-2xl py-4 px-6 border-none focus:ring-2 focus:ring-[#800000]">
+                            <select name="position" required
+                                class="w-full bg-[#F5E6D3] rounded-2xl py-4 px-6 border-none focus:ring-2 focus:ring-[#800000] appearance-none">
+                                <option value="" disabled selected>Pilih Posisi yang Dilamar</option>
+                                <option value="Staff Operasional">Staff Operasional</option>
+                                <option value="IT Support">IT Support</option>
+                                <option value="Administrasi">Administrasi</option>
+                                <option value="Lainnya">Lainnya</option>
+                            </select>
+                            <div class="space-y-2">
+                                <label class="text-[10px] font-bold uppercase tracking-widest opacity-60 ml-2 text-[#3E2723]">Upload CV (PDF, Maks 5MB)</label>
+                                <input type="file" name="attachment" accept="application/pdf" required
+                                    class="w-full bg-[#F5E6D3] rounded-2xl py-3 px-6 border-none focus:ring-2 focus:ring-[#800000] text-xs text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-[10px] file:font-bold file:bg-[#800000] file:text-white hover:file:bg-black transition-all">
+                            </div>
                             <button type="submit" id="submitBtn"
                                 class="w-full bg-[#800000] text-white py-4 rounded-2xl font-black uppercase text-xs shadow-xl">Kirim
                                 Sekarang</button>
@@ -1992,12 +2026,152 @@
     </div>
 
     <!-- WHATSAPP -->
-    <a href="https://wa.me/628123456789" aria-label="Chat WhatsApp"
+    <a href="https://wa.me/628XXXXXXXXXX" aria-label="Chat WhatsApp"
         class="fixed bottom-6 right-6 z-[60] w-14 h-14 bg-[#25d366] rounded-full flex items-center justify-center text-white text-3xl shadow-2xl hover:scale-110 transition-transform">
         <i class="fab fa-whatsapp"></i>
     </a>
 
     <script>
+        // Database Portfolio
+        const portfolioData = [
+            { title: "KAWASAN BIMOLI", loc: "Jakarta Utara", img: "foto/bimoli.jpeg", border: "#800000" },
+            { title: "RS MARY CILEUNGSI", loc: "Bogor, Jawa Barat", img: "foto/rs_mery.jpeg", border: "#1A1A1A" },
+            { title: "HOLLYWOOD JUNCTION", loc: "Cikarang", img: "foto/jababeka.jpeg", border: "#800000" },
+            { title: "GADING CENTER", loc: "Jakarta Utara", img: "https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800", border: "#1A1A1A" },
+            { title: "SIAK PORT AREA", loc: "Tanjung Priok", img: "https://images.unsplash.com/photo-1524522173746-f628baad3644?q=80&w=800", border: "#800000" },
+            { title: "SIAK LOGISTIC", loc: "Tanjung Priok", img: "https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800", border: "#1A1A1A" },
+
+            // --- DAFTAR PROYEK 7 - 100 ---
+            // Hapus tanda * pada 'title' untuk menampilkan proyek di web satu per satu
+            { title: "*PROYEK BARU 7", loc: "Lokasi Proyek 7", img: "https://picsum.photos/id/17/800/800", border: "#800000" },
+            { title: "*PROYEK BARU 8", loc: "Lokasi Proyek 8", img: "https://picsum.photos/id/18/800/800", border: "#1A1A1A" },
+            { title: "*PROYEK BARU 9", loc: "Lokasi Proyek 9", img: "https://picsum.photos/id/19/800/800", border: "#800000" },
+            { title: "*PROYEK BARU 10", loc: "Lokasi Proyek 10", img: "https://picsum.photos/id/20/800/800", border: "#1A1A1A" },
+            { title: "*PROYEK BARU 11", loc: "Lokasi Proyek 11", img: "https://picsum.photos/id/21/800/800", border: "#800000" },
+            { title: "*PROYEK BARU 12", loc: "Lokasi Proyek 12", img: "https://picsum.photos/id/22/800/800", border: "#1A1A1A" },
+            { title: "*PROYEK BARU 13", loc: "Lokasi Proyek 13", img: "https://picsum.photos/id/23/800/800", border: "#800000" },
+            { title: "*PROYEK BARU 14", loc: "Lokasi Proyek 14", img: "https://picsum.photos/id/24/800/800", border: "#1A1A1A" },
+            { title: "*PROYEK BARU 15", loc: "Lokasi Proyek 15", img: "https://picsum.photos/id/25/800/800", border: "#800000" },
+            { title: "*PROYEK BARU 16", loc: "Lokasi Proyek 16", img: "https://picsum.photos/id/26/800/800", border: "#1A1A1A" },
+            { title: "*PROYEK BARU 17", loc: "Lokasi Proyek 17", img: "https://picsum.photos/id/27/800/800", border: "#800000" },
+            { title: "*PROYEK BARU 18", loc: "Lokasi Proyek 18", img: "https://picsum.photos/id/28/800/800", border: "#1A1A1A" },
+            { title: "*PROYEK BARU 19", loc: "Lokasi Proyek 19", img: "https://picsum.photos/id/29/800/800", border: "#800000" },
+            { title: "*PROYEK BARU 20", loc: "Lokasi Proyek 20", img: "https://picsum.photos/id/30/800/800", border: "#1A1A1A" },
+            { title: "*PROYEK BARU 21", loc: "Lokasi Proyek 21", img: "https://picsum.photos/id/31/800/800", border: "#800000" },
+            { title: "*PROYEK BARU 22", loc: "Lokasi Proyek 22", img: "https://picsum.photos/id/32/800/800", border: "#1A1A1A" },
+            { title: "*PROYEK BARU 23", loc: "Lokasi Proyek 23", img: "https://picsum.photos/id/33/800/800", border: "#800000" },
+            { title: "*PROYEK BARU 24", loc: "Lokasi Proyek 24", img: "https://picsum.photos/id/34/800/800", border: "#1A1A1A" },
+            { title: "*PROYEK BARU 25", loc: "Lokasi Proyek 25", img: "https://picsum.photos/id/35/800/800", border: "#800000" },
+            { title: "*PROYEK BARU 26", loc: "Lokasi Proyek 26", img: "https://picsum.photos/id/36/800/800", border: "#1A1A1A" },
+            { title: "*PROYEK BARU 27", loc: "Lokasi Proyek 27", img: "https://picsum.photos/id/37/800/800", border: "#800000" },
+            { title: "*PROYEK BARU 28", loc: "Lokasi Proyek 28", img: "https://picsum.photos/id/38/800/800", border: "#1A1A1A" },
+            { title: "*PROYEK BARU 29", loc: "Lokasi Proyek 29", img: "https://picsum.photos/id/39/800/800", border: "#800000" },
+            { title: "*PROYEK BARU 30", loc: "Lokasi Proyek 30", img: "https://picsum.photos/id/40/800/800", border: "#1A1A1A" },
+            { title: "*PROYEK BARU 31", loc: "Lokasi Proyek 31", img: "https://picsum.photos/id/41/800/800", border: "#800000" },
+            { title: "*PROYEK BARU 32", loc: "Lokasi Proyek 32", img: "https://picsum.photos/id/42/800/800", border: "#1A1A1A" },
+            { title: "*PROYEK BARU 33", loc: "Lokasi Proyek 33", img: "https://picsum.photos/id/43/800/800", border: "#800000" },
+            { title: "*PROYEK BARU 34", loc: "Lokasi Proyek 34", img: "https://picsum.photos/id/44/800/800", border: "#1A1A1A" },
+            { title: "*PROYEK BARU 35", loc: "Lokasi Proyek 35", img: "https://picsum.photos/id/45/800/800", border: "#800000" },
+            { title: "*PROYEK BARU 36", loc: "Lokasi Proyek 36", img: "https://picsum.photos/id/46/800/800", border: "#1A1A1A" },
+            { title: "*PROYEK BARU 37", loc: "Lokasi Proyek 37", img: "https://picsum.photos/id/47/800/800", border: "#800000" },
+            { title: "*PROYEK BARU 38", loc: "Lokasi Proyek 38", img: "https://picsum.photos/id/48/800/800", border: "#1A1A1A" },
+            { title: "*PROYEK BARU 39", loc: "Lokasi Proyek 39", img: "https://picsum.photos/id/49/800/800", border: "#800000" },
+            { title: "*PROYEK BARU 40", loc: "Lokasi Proyek 40", img: "https://picsum.photos/id/50/800/800", border: "#1A1A1A" },
+            { title: "*PROYEK BARU 41", loc: "Lokasi Proyek 41", img: "https://picsum.photos/id/51/800/800", border: "#800000" },
+            { title: "*PROYEK BARU 42", loc: "Lokasi Proyek 42", img: "https://picsum.photos/id/52/800/800", border: "#1A1A1A" },
+            { title: "*PROYEK BARU 43", loc: "Lokasi Proyek 43", img: "https://picsum.photos/id/53/800/800", border: "#800000" },
+            { title: "*PROYEK BARU 44", loc: "Lokasi Proyek 44", img: "https://picsum.photos/id/54/800/800", border: "#1A1A1A" },
+            { title: "*PROYEK BARU 45", loc: "Lokasi Proyek 45", img: "https://picsum.photos/id/55/800/800", border: "#800000" },
+            { title: "*PROYEK BARU 46", loc: "Lokasi Proyek 46", img: "https://picsum.photos/id/56/800/800", border: "#1A1A1A" },
+            { title: "*PROYEK BARU 47", loc: "Lokasi Proyek 47", img: "https://picsum.photos/id/57/800/800", border: "#800000" },
+            { title: "*PROYEK BARU 48", loc: "Lokasi Proyek 48", img: "https://picsum.photos/id/58/800/800", border: "#1A1A1A" },
+            { title: "*PROYEK BARU 49", loc: "Lokasi Proyek 49", img: "https://picsum.photos/id/59/800/800", border: "#800000" },
+            { title: "*PROYEK BARU 50", loc: "Lokasi Proyek 50", img: "https://picsum.photos/id/60/800/800", border: "#1A1A1A" },
+            { title: "*PROYEK BARU 51", loc: "Lokasi Proyek 51", img: "https://picsum.photos/id/61/800/800", border: "#800000" },
+            { title: "*PROYEK BARU 52", loc: "Lokasi Proyek 52", img: "https://picsum.photos/id/62/800/800", border: "#1A1A1A" },
+            { title: "*PROYEK BARU 53", loc: "Lokasi Proyek 53", img: "https://picsum.photos/id/63/800/800", border: "#800000" },
+            { title: "*PROYEK BARU 54", loc: "Lokasi Proyek 54", img: "https://picsum.photos/id/64/800/800", border: "#1A1A1A" },
+            { title: "*PROYEK BARU 55", loc: "Lokasi Proyek 55", img: "https://picsum.photos/id/65/800/800", border: "#800000" },
+            { title: "*PROYEK BARU 56", loc: "Lokasi Proyek 56", img: "https://picsum.photos/id/66/800/800", border: "#1A1A1A" },
+            { title: "*PROYEK BARU 57", loc: "Lokasi Proyek 57", img: "https://picsum.photos/id/67/800/800", border: "#800000" },
+            { title: "*PROYEK BARU 58", loc: "Lokasi Proyek 58", img: "https://picsum.photos/id/68/800/800", border: "#1A1A1A" },
+            { title: "*PROYEK BARU 59", loc: "Lokasi Proyek 59", img: "https://picsum.photos/id/69/800/800", border: "#800000" },
+            { title: "*PROYEK BARU 60", loc: "Lokasi Proyek 60", img: "https://picsum.photos/id/70/800/800", border: "#1A1A1A" },
+            { title: "*PROYEK BARU 61", loc: "Lokasi Proyek 61", img: "https://picsum.photos/id/71/800/800", border: "#800000" },
+            { title: "*PROYEK BARU 62", loc: "Lokasi Proyek 62", img: "https://picsum.photos/id/72/800/800", border: "#1A1A1A" },
+            { title: "*PROYEK BARU 63", loc: "Lokasi Proyek 63", img: "https://picsum.photos/id/73/800/800", border: "#800000" },
+            { title: "*PROYEK BARU 64", loc: "Lokasi Proyek 64", img: "https://picsum.photos/id/74/800/800", border: "#1A1A1A" },
+            { title: "*PROYEK BARU 65", loc: "Lokasi Proyek 65", img: "https://picsum.photos/id/75/800/800", border: "#800000" },
+            { title: "*PROYEK BARU 66", loc: "Lokasi Proyek 66", img: "https://picsum.photos/id/76/800/800", border: "#1A1A1A" },
+            { title: "*PROYEK BARU 67", loc: "Lokasi Proyek 67", img: "https://picsum.photos/id/77/800/800", border: "#800000" },
+            { title: "*PROYEK BARU 68", loc: "Lokasi Proyek 68", img: "https://picsum.photos/id/78/800/800", border: "#1A1A1A" },
+            { title: "*PROYEK BARU 69", loc: "Lokasi Proyek 69", img: "https://picsum.photos/id/79/800/800", border: "#800000" },
+            { title: "*PROYEK BARU 70", loc: "Lokasi Proyek 70", img: "https://picsum.photos/id/80/800/800", border: "#1A1A1A" },
+            { title: "*PROYEK BARU 71", loc: "Lokasi Proyek 71", img: "https://picsum.photos/id/81/800/800", border: "#800000" },
+            { title: "*PROYEK BARU 72", loc: "Lokasi Proyek 72", img: "https://picsum.photos/id/82/800/800", border: "#1A1A1A" },
+            { title: "*PROYEK BARU 73", loc: "Lokasi Proyek 73", img: "https://picsum.photos/id/83/800/800", border: "#800000" },
+            { title: "*PROYEK BARU 74", loc: "Lokasi Proyek 74", img: "https://picsum.photos/id/84/800/800", border: "#1A1A1A" },
+            { title: "*PROYEK BARU 75", loc: "Lokasi Proyek 75", img: "https://picsum.photos/id/85/800/800", border: "#800000" },
+            { title: "*PROYEK BARU 76", loc: "Lokasi Proyek 76", img: "https://picsum.photos/id/86/800/800", border: "#1A1A1A" },
+            { title: "*PROYEK BARU 77", loc: "Lokasi Proyek 77", img: "https://picsum.photos/id/87/800/800", border: "#800000" },
+            { title: "*PROYEK BARU 78", loc: "Lokasi Proyek 78", img: "https://picsum.photos/id/88/800/800", border: "#1A1A1A" },
+            { title: "*PROYEK BARU 79", loc: "Lokasi Proyek 79", img: "https://picsum.photos/id/89/800/800", border: "#800000" },
+            { title: "*PROYEK BARU 80", loc: "Lokasi Proyek 80", img: "https://picsum.photos/id/90/800/800", border: "#1A1A1A" },
+            { title: "*PROYEK BARU 81", loc: "Lokasi Proyek 81", img: "https://picsum.photos/id/91/800/800", border: "#800000" },
+            { title: "*PROYEK BARU 82", loc: "Lokasi Proyek 82", img: "https://picsum.photos/id/92/800/800", border: "#1A1A1A" },
+            { title: "*PROYEK BARU 83", loc: "Lokasi Proyek 83", img: "https://picsum.photos/id/93/800/800", border: "#800000" },
+            { title: "*PROYEK BARU 84", loc: "Lokasi Proyek 84", img: "https://picsum.photos/id/94/800/800", border: "#1A1A1A" },
+            { title: "*PROYEK BARU 85", loc: "Lokasi Proyek 85", img: "https://picsum.photos/id/95/800/800", border: "#800000" },
+            { title: "*PROYEK BARU 86", loc: "Lokasi Proyek 86", img: "https://picsum.photos/id/96/800/800", border: "#1A1A1A" },
+            { title: "*PROYEK BARU 87", loc: "Lokasi Proyek 87", img: "https://picsum.photos/id/97/800/800", border: "#800000" },
+            { title: "*PROYEK BARU 88", loc: "Lokasi Proyek 88", img: "https://picsum.photos/id/98/800/800", border: "#1A1A1A" },
+            { title: "*PROYEK BARU 89", loc: "Lokasi Proyek 89", img: "https://picsum.photos/id/99/800/800", border: "#800000" },
+            { title: "*PROYEK BARU 90", loc: "Lokasi Proyek 90", img: "https://picsum.photos/id/100/800/800", border: "#1A1A1A" },
+            { title: "*PROYEK BARU 91", loc: "Lokasi Proyek 91", img: "https://picsum.photos/id/101/800/800", border: "#800000" },
+            { title: "*PROYEK BARU 92", loc: "Lokasi Proyek 92", img: "https://picsum.photos/id/102/800/800", border: "#1A1A1A" },
+            { title: "*PROYEK BARU 93", loc: "Lokasi Proyek 93", img: "https://picsum.photos/id/103/800/800", border: "#800000" },
+            { title: "*PROYEK BARU 94", loc: "Lokasi Proyek 94", img: "https://picsum.photos/id/104/800/800", border: "#1A1A1A" },
+            { title: "*PROYEK BARU 95", loc: "Lokasi Proyek 95", img: "https://picsum.photos/id/105/800/800", border: "#800000" },
+            { title: "*PROYEK BARU 96", loc: "Lokasi Proyek 96", img: "https://picsum.photos/id/106/800/800", border: "#1A1A1A" },
+            { title: "*PROYEK BARU 97", loc: "Lokasi Proyek 97", img: "https://picsum.photos/id/107/800/800", border: "#800000" },
+            { title: "*PROYEK BARU 98", loc: "Lokasi Proyek 98", img: "https://picsum.photos/id/108/800/800", border: "#1A1A1A" },
+            { title: "*PROYEK BARU 99", loc: "Lokasi Proyek 99", img: "https://picsum.photos/id/109/800/800", border: "#800000" },
+            { title: "*PROYEK BARU 100", loc: "Lokasi Proyek 100", img: "https://picsum.photos/id/110/800/800", border: "#1A1A1A" }
+        ];
+
+        function renderPortfolio() {
+            const grid = document.getElementById('portfolio-grid');
+            if (!grid) return;
+            
+            // Hanya tampilkan proyek yang judulnya TIDAK diawali tanda '*'
+            const visibleProjects = portfolioData.filter(item => !item.title.startsWith('*'));
+
+            grid.innerHTML = visibleProjects.map((item, index) => {
+                // Tambahkan delay animasi untuk 6 item pertama agar terlihat estetik
+                const delayClass = index < 6 ? `reveal-delay-${index % 5}` : '';
+                
+                return `
+                    <div class="portfolio-item group reveal-left ${delayClass}">
+                        <div onclick="openImageModal('${item.img}')"
+                            class="zoom-container aspect-square shadow-xl rounded-2xl md:rounded-[1.5rem] border-b-4 cursor-pointer overflow-hidden" 
+                            style="border-color: ${item.border}">
+                            <img src="${item.img}" 
+                                 class="grayscale group-hover:grayscale-0" 
+                                 loading="lazy" 
+                                 alt="${item.title}">
+                            <div class="photo-text">
+                                <h4 class="text-xs md:text-lg font-black text-white italic leading-tight">${item.title}</h4>
+                                <p class="text-[8px] md:text-xs font-bold text-gray-300">${item.loc}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            // Inisialisasi ulang animasi setelah elemen ditambahkan ke DOM
+            setTimeout(initScrollAnimations, 100);
+        }
+
         const details = {
             management: { title: "Management Fee", desc: "Kami mengelola penuh operasional dengan imbal jasa tetap. Investasi perangkat keras sepenuhnya menjadi tanggung jawab kami. Owner menerima pendapatan bersih setelah biaya operasional." },
             profit: { title: "Profit Sharing", desc: "Sistem bagi hasil berdasarkan Laba Bersih Operasional. Pendapatan dikurangi pajak daerah dan biaya operasional langsung, kemudian laba bersih dibagi sesuai persentase kesepakatan." },
@@ -2111,6 +2285,13 @@
                 sec.style.display = 'none';
             });
 
+            // Update Active Link State
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                const linkTarget = link.getAttribute('onclick').match(/'([^']+)'/)[1];
+                link.classList.toggle('active', linkTarget === pageId);
+            });
+
             const target = document.getElementById(pageId);
             if (target) {
                 target.style.display = 'block';
@@ -2144,6 +2325,51 @@
         if (careerForm) {
             careerForm.addEventListener('submit', function(e) {
                 e.preventDefault();
+                
+                // Validasi Input Sisi Klien
+                const name = this.name.value.trim();
+                const email = this.email.value.trim();
+                const phone = this.phone.value.trim();
+                const position = this.position.value;
+                const cvFile = this.attachment.files[0];
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                const phoneRegex = /^[0-9]{10,15}$/;
+
+                if (name.length < 3) {
+                    alert("Mohon masukkan nama lengkap yang valid (minimal 3 karakter).");
+                    return;
+                }
+
+                if (!emailRegex.test(email)) {
+                    alert("Mohon masukkan alamat email yang valid.");
+                    return;
+                }
+
+                if (!phoneRegex.test(phone)) {
+                    alert("Mohon masukkan nomor telepon yang valid (10-15 digit angka).");
+                    return;
+                }
+
+                if (!position) {
+                    alert("Mohon pilih posisi yang ingin Anda lamar.");
+                    return;
+                }
+
+                if (!cvFile) {
+                    alert("Mohon lampirkan CV Anda.");
+                    return;
+                }
+
+                if (cvFile.type !== "application/pdf") {
+                    alert("Mohon unggah file dalam format PDF.");
+                    return;
+                }
+
+                if (cvFile.size > 5 * 1024 * 1024) {
+                    alert("Ukuran file terlalu besar. Maksimal adalah 5MB.");
+                    return;
+                }
+
                 const btn = document.getElementById('submitBtn');
                 const originalText = btn.innerText;
                 
@@ -2172,6 +2398,7 @@
 
         window.onload = () => {
             const initialPage = location.hash.replace('#', '') || 'home';
+            renderPortfolio();
             showPage(initialPage, false);
         };
     </script>
