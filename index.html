@@ -2436,91 +2436,6 @@
             showPage(page, false);
         };
 
-        window.addEventListener('scroll', () => {
-            const btn = document.getElementById('backToTop');
-            if (window.scrollY > 500) {
-                btn.classList.add('visible');
-            } else {
-                btn.classList.remove('visible');
-            }
-        });
-
-        // Career Form Logic
-        const careerForm = document.getElementById('careerForm');
-        if (careerForm) {
-            careerForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                // Validasi Input Sisi Klien
-                const name = this.name.value.trim();
-                const email = this.email.value.trim();
-                const phone = this.phone.value.trim();
-                const position = this.position.value;
-                const cvFile = this.attachment.files[0];
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                const phoneRegex = /^[0-9]{10,15}$/;
-
-                if (name.length < 3) {
-                    alert("Mohon masukkan nama lengkap yang valid (minimal 3 karakter).");
-                    return;
-                }
-
-                if (!emailRegex.test(email)) {
-                    alert("Mohon masukkan alamat email yang valid.");
-                    return;
-                }
-
-                if (!phoneRegex.test(phone)) {
-                    alert("Mohon masukkan nomor telepon yang valid (10-15 digit angka).");
-                    return;
-                }
-
-                if (!position) {
-                    alert("Mohon pilih posisi yang ingin Anda lamar.");
-                    return;
-                }
-
-                if (!cvFile) {
-                    alert("Mohon lampirkan CV Anda.");
-                    return;
-                }
-
-                if (cvFile.type !== "application/pdf") {
-                    alert("Mohon unggah file dalam format PDF.");
-                    return;
-                }
-
-                if (cvFile.size > 5 * 1024 * 1024) {
-                    alert("Ukuran file terlalu besar. Maksimal adalah 5MB.");
-                    return;
-                }
-
-                const btn = document.getElementById('submitBtn');
-                const originalText = btn.innerText;
-                
-                btn.innerText = "MENGIRIM...";
-                btn.disabled = true;
-
-                fetch(this.action, {
-                    method: 'POST',
-                    body: new FormData(this),
-                    headers: { 'Accept': 'application/json' }
-                })
-                .then(response => response.json())
-                .then(data => {
-                    alert("Terima kasih! Lamaran Anda telah berhasil terkirim.");
-                    careerForm.reset();
-                })
-                .catch(error => {
-                    alert("Maaf, terjadi kesalahan. Pastikan Anda menjalankan web ini di server (bukan file lokal).");
-                })
-                .finally(() => {
-                    btn.innerText = originalText;
-                    btn.disabled = false;
-                });
-            });
-        }
-
         window.onload = () => {
             const initialPage = location.hash.replace('#', '') || 'home';
             syncFromCloud(); // Ambil data terbaru dari internet saat web dibuka
@@ -2529,22 +2444,4 @@
         };
     </script>
 </body>
-
-</html> 
-
-</html>             btn.innerText = originalText;
-                    btn.disabled = false;
-                });
-            });
-        }
-
-        window.onload = () => {
-            const initialPage = location.hash.replace('#', '') || 'home';
-            syncFromCloud(); // Ambil data terbaru dari internet saat web dibuka
-            renderPortfolio();
-            showPage(initialPage, false);
-        };
-    </script>
-</body>
-
-</html> 
+</html>
