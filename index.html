@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PT RITS NUSA KENARI - Integrated Facility Service & Parking Management</title>
     <meta name="description" content="PT RITS NUSA KENARI menyediakan solusi manajemen parkir terintegrasi, sistem smart gate manless, dan layanan fasilitas profesional sejak 2025.">
-    <meta name="keywords" content="parking management, smart gate, facility service, RITS Nusa Kenari, sistem parkir">
     <link rel="icon" type="image/png" href="logo.png">
 
     <!-- Open Graph / Facebook / WhatsApp -->
@@ -19,6 +18,10 @@
     <!-- Framework & Fonts -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Firebase SDK (Version 8 Compat) -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
     <link
         href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap"
         rel="stylesheet">
@@ -306,6 +309,7 @@
                 <button onclick="showPage('services')" class="nav-link hover:text-[#800000]">Services</button>
                 <button onclick="showPage('portfolio')" class="nav-link hover:text-[#800000]">Portfolio</button>
                 <button onclick="showPage('career')" class="nav-link hover:text-[#800000]">Career</button>
+                <button onclick="showPage('admin-login')" id="adminNav" class="nav-link text-gray-300 hover:text-[#800000]"><i class="fas fa-lock text-[8px]"></i></button>
                 <button onclick="showPage('contact')" 
                     class="nav-link bg-[#800000] text-white px-6 py-2.5 rounded-full hover:bg-black transition-all shadow-md !border-none after:hidden">Get
                     in Touch</button>
@@ -326,6 +330,7 @@
             <button onclick="showPage('services'); toggleMenu()" class="hover:text-[#800000]">Services</button>
             <button onclick="showPage('portfolio'); toggleMenu()" class="hover:text-[#800000]">Portfolio</button>
             <button onclick="showPage('career'); toggleMenu()" class="hover:text-[#800000]">Career</button>
+            <button onclick="showPage('admin-login'); toggleMenu()" class="text-gray-400 text-sm">Admin Login</button>
             <button onclick="showPage('contact'); toggleMenu()"
                 class="bg-[#800000] text-white py-4 rounded-2xl shadow-xl">Contact Us</button>
         </div>
@@ -352,7 +357,7 @@
 
                         <!-- ACTION BUTTONS -->
                         <div class="flex justify-center lg:justify-start gap-2 md:gap-4 reveal reveal-delay-3">
-                            <a href="https://wa.me/628XXXXXXXXXX?text=Halo%20PT%20RITS%20NUSA%20KENARI,%20saya%20tertarik%20untuk%20mulai%20kerjasama." target="_blank"
+                            <a href="https://wa.me/6289510360700?text=Halo%20PT%20RITS%20NUSA%20KENARI,%20saya%20tertarik%20untuk%20mulai%20kerjasama." target="_blank"
                                 class="bg-[#800000] text-white px-6 md:px-10 py-4 md:py-5 rounded-2xl font-black text-[10px] md:text-xs uppercase tracking-widest shadow-2xl hover:scale-105 transition-all flex items-center justify-center text-center">Mulai
                                 Kerjasama</a>
 
@@ -1953,7 +1958,7 @@
                             </div>
                             <div>
                                 <h5 class="font-bold text-lg uppercase">Hubungi Kami</h5>
-                                <p class="text-gray-500">Phone: +62 21 1234 5678<br>Email: info@ritsnusakenari.com</p>
+                                <p class="text-gray-500">Phone: +62 895 1036 0700<br>Email: info@ritsnusakenari.com</p>
                             </div>
                         </div>
                     </div>
@@ -1962,6 +1967,53 @@
                     <iframe
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3967.1030232501655!2d106.9022416!3d-6.116812!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6a1f3377519391%3A0x6a6d6f2c68f9a263!2sGading%20Center!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid"
                         width="100%" height="100%" style="border:0;" loading="lazy"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- ADMIN LOGIN SECTION -->
+        <section id="admin-login" class="page-section py-24 px-6 bg-[#F5E6D3]">
+            <div class="max-w-md mx-auto bg-white p-10 rounded-[2.5rem] shadow-2xl text-center">
+                <i class="fas fa-user-shield text-4xl text-[#800000] mb-6"></i>
+                <h2 class="text-2xl font-serif italic mb-6">Admin Access</h2>
+                <input type="password" id="adminPass" placeholder="Masukkan Password" 
+                    class="w-full bg-[#F5E6D3] rounded-2xl py-4 px-6 mb-4 border-none focus:ring-2 focus:ring-[#800000]">
+                <button onclick="handleLogin()" class="w-full bg-[#800000] text-white py-4 rounded-2xl font-black uppercase text-xs">Login</button>
+            </div>
+        </section>
+
+        <!-- ADMIN DASHBOARD SECTION -->
+        <section id="admin-dashboard" class="page-section py-24 px-6 bg-white">
+            <div class="max-w-4xl mx-auto">
+                <div class="flex justify-between items-center mb-12">
+                    <h2 class="text-3xl font-serif italic">Portfolio Manager</h2>
+                    <button onclick="handleLogout()" class="text-xs font-bold text-red-600 uppercase tracking-widest">Logout</button>
+                </div>
+                
+                <!-- Form Tambah Data -->
+                <div class="bg-[#F5E6D3] p-8 rounded-[2rem] mb-12">
+                    <h4 class="font-bold mb-4 uppercase text-xs tracking-widest">Tambah Proyek Baru</h4>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <input type="text" id="newTitle" placeholder="Nama Proyek (Contoh: KAWASAN BIMOLI)" class="rounded-xl p-3 border-none">
+                        <input type="text" id="newLoc" placeholder="Lokasi (Contoh: Jakarta Utara)" class="rounded-xl p-3 border-none">
+                        <div class="flex flex-col gap-1">
+                            <label class="text-[10px] font-bold opacity-50 ml-1">FILE GAMBAR (JPG/PNG)</label>
+                            <input type="file" id="newImg" accept="image/*" class="rounded-xl p-2 bg-white border-none text-xs">
+                        </div>
+                        <select id="newBorder" class="rounded-xl p-3 border-none">
+                            <option value="#800000">Border Maroon</option>
+                            <option value="#1A1A1A">Border Carbon</option>
+                        </select>
+                    </div>
+                    <button onclick="addProject()" class="mt-4 bg-[#800000] text-white px-8 py-3 rounded-xl font-bold text-xs uppercase">Simpan Proyek</button>
+                </div>
+
+                <!-- List Editor -->
+                <div class="space-y-4">
+                    <h4 class="font-bold mb-4 uppercase text-xs tracking-widest">Daftar Portofolio Aktif</h4>
+                    <div id="admin-list" class="grid gap-4">
+                        <!-- Content by JS -->
+                    </div>
                 </div>
             </div>
         </section>
@@ -2026,121 +2078,52 @@
     </div>
 
     <!-- WHATSAPP -->
-    <a href="https://wa.me/628XXXXXXXXXX" aria-label="Chat WhatsApp"
+    <a href="https://wa.me/6289510360700" aria-label="Chat WhatsApp"
         class="fixed bottom-6 right-6 z-[60] w-14 h-14 bg-[#25d366] rounded-full flex items-center justify-center text-white text-3xl shadow-2xl hover:scale-110 transition-transform">
         <i class="fab fa-whatsapp"></i>
     </a>
 
     <script>
         // Database Portfolio
-        const portfolioData = [
-            { title: "KAWASAN BIMOLI", loc: "Jakarta Utara", img: "foto/bimoli.jpeg", border: "#800000" },
-            { title: "RS MARY CILEUNGSI", loc: "Bogor, Jawa Barat", img: "foto/rs_mery.jpeg", border: "#1A1A1A" },
-            { title: "HOLLYWOOD JUNCTION", loc: "Cikarang", img: "foto/jababeka.jpeg", border: "#800000" },
-            { title: "GADING CENTER", loc: "Jakarta Utara", img: "https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800", border: "#1A1A1A" },
-            { title: "SIAK PORT AREA", loc: "Tanjung Priok", img: "https://images.unsplash.com/photo-1524522173746-f628baad3644?q=80&w=800", border: "#800000" },
-            { title: "SIAK LOGISTIC", loc: "Tanjung Priok", img: "https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800", border: "#1A1A1A" },
+        // Kosongkan array agar web hanya menampilkan data real-time dari Firebase Cloud
+        let portfolioData = [];
 
-            // --- DAFTAR PROYEK 7 - 100 ---
-            // Hapus tanda * pada 'title' untuk menampilkan proyek di web satu per satu
-            { title: "*PROYEK BARU 7", loc: "Lokasi Proyek 7", img: "https://picsum.photos/id/17/800/800", border: "#800000" },
-            { title: "*PROYEK BARU 8", loc: "Lokasi Proyek 8", img: "https://picsum.photos/id/18/800/800", border: "#1A1A1A" },
-            { title: "*PROYEK BARU 9", loc: "Lokasi Proyek 9", img: "https://picsum.photos/id/19/800/800", border: "#800000" },
-            { title: "*PROYEK BARU 10", loc: "Lokasi Proyek 10", img: "https://picsum.photos/id/20/800/800", border: "#1A1A1A" },
-            { title: "*PROYEK BARU 11", loc: "Lokasi Proyek 11", img: "https://picsum.photos/id/21/800/800", border: "#800000" },
-            { title: "*PROYEK BARU 12", loc: "Lokasi Proyek 12", img: "https://picsum.photos/id/22/800/800", border: "#1A1A1A" },
-            { title: "*PROYEK BARU 13", loc: "Lokasi Proyek 13", img: "https://picsum.photos/id/23/800/800", border: "#800000" },
-            { title: "*PROYEK BARU 14", loc: "Lokasi Proyek 14", img: "https://picsum.photos/id/24/800/800", border: "#1A1A1A" },
-            { title: "*PROYEK BARU 15", loc: "Lokasi Proyek 15", img: "https://picsum.photos/id/25/800/800", border: "#800000" },
-            { title: "*PROYEK BARU 16", loc: "Lokasi Proyek 16", img: "https://picsum.photos/id/26/800/800", border: "#1A1A1A" },
-            { title: "*PROYEK BARU 17", loc: "Lokasi Proyek 17", img: "https://picsum.photos/id/27/800/800", border: "#800000" },
-            { title: "*PROYEK BARU 18", loc: "Lokasi Proyek 18", img: "https://picsum.photos/id/28/800/800", border: "#1A1A1A" },
-            { title: "*PROYEK BARU 19", loc: "Lokasi Proyek 19", img: "https://picsum.photos/id/29/800/800", border: "#800000" },
-            { title: "*PROYEK BARU 20", loc: "Lokasi Proyek 20", img: "https://picsum.photos/id/30/800/800", border: "#1A1A1A" },
-            { title: "*PROYEK BARU 21", loc: "Lokasi Proyek 21", img: "https://picsum.photos/id/31/800/800", border: "#800000" },
-            { title: "*PROYEK BARU 22", loc: "Lokasi Proyek 22", img: "https://picsum.photos/id/32/800/800", border: "#1A1A1A" },
-            { title: "*PROYEK BARU 23", loc: "Lokasi Proyek 23", img: "https://picsum.photos/id/33/800/800", border: "#800000" },
-            { title: "*PROYEK BARU 24", loc: "Lokasi Proyek 24", img: "https://picsum.photos/id/34/800/800", border: "#1A1A1A" },
-            { title: "*PROYEK BARU 25", loc: "Lokasi Proyek 25", img: "https://picsum.photos/id/35/800/800", border: "#800000" },
-            { title: "*PROYEK BARU 26", loc: "Lokasi Proyek 26", img: "https://picsum.photos/id/36/800/800", border: "#1A1A1A" },
-            { title: "*PROYEK BARU 27", loc: "Lokasi Proyek 27", img: "https://picsum.photos/id/37/800/800", border: "#800000" },
-            { title: "*PROYEK BARU 28", loc: "Lokasi Proyek 28", img: "https://picsum.photos/id/38/800/800", border: "#1A1A1A" },
-            { title: "*PROYEK BARU 29", loc: "Lokasi Proyek 29", img: "https://picsum.photos/id/39/800/800", border: "#800000" },
-            { title: "*PROYEK BARU 30", loc: "Lokasi Proyek 30", img: "https://picsum.photos/id/40/800/800", border: "#1A1A1A" },
-            { title: "*PROYEK BARU 31", loc: "Lokasi Proyek 31", img: "https://picsum.photos/id/41/800/800", border: "#800000" },
-            { title: "*PROYEK BARU 32", loc: "Lokasi Proyek 32", img: "https://picsum.photos/id/42/800/800", border: "#1A1A1A" },
-            { title: "*PROYEK BARU 33", loc: "Lokasi Proyek 33", img: "https://picsum.photos/id/43/800/800", border: "#800000" },
-            { title: "*PROYEK BARU 34", loc: "Lokasi Proyek 34", img: "https://picsum.photos/id/44/800/800", border: "#1A1A1A" },
-            { title: "*PROYEK BARU 35", loc: "Lokasi Proyek 35", img: "https://picsum.photos/id/45/800/800", border: "#800000" },
-            { title: "*PROYEK BARU 36", loc: "Lokasi Proyek 36", img: "https://picsum.photos/id/46/800/800", border: "#1A1A1A" },
-            { title: "*PROYEK BARU 37", loc: "Lokasi Proyek 37", img: "https://picsum.photos/id/47/800/800", border: "#800000" },
-            { title: "*PROYEK BARU 38", loc: "Lokasi Proyek 38", img: "https://picsum.photos/id/48/800/800", border: "#1A1A1A" },
-            { title: "*PROYEK BARU 39", loc: "Lokasi Proyek 39", img: "https://picsum.photos/id/49/800/800", border: "#800000" },
-            { title: "*PROYEK BARU 40", loc: "Lokasi Proyek 40", img: "https://picsum.photos/id/50/800/800", border: "#1A1A1A" },
-            { title: "*PROYEK BARU 41", loc: "Lokasi Proyek 41", img: "https://picsum.photos/id/51/800/800", border: "#800000" },
-            { title: "*PROYEK BARU 42", loc: "Lokasi Proyek 42", img: "https://picsum.photos/id/52/800/800", border: "#1A1A1A" },
-            { title: "*PROYEK BARU 43", loc: "Lokasi Proyek 43", img: "https://picsum.photos/id/53/800/800", border: "#800000" },
-            { title: "*PROYEK BARU 44", loc: "Lokasi Proyek 44", img: "https://picsum.photos/id/54/800/800", border: "#1A1A1A" },
-            { title: "*PROYEK BARU 45", loc: "Lokasi Proyek 45", img: "https://picsum.photos/id/55/800/800", border: "#800000" },
-            { title: "*PROYEK BARU 46", loc: "Lokasi Proyek 46", img: "https://picsum.photos/id/56/800/800", border: "#1A1A1A" },
-            { title: "*PROYEK BARU 47", loc: "Lokasi Proyek 47", img: "https://picsum.photos/id/57/800/800", border: "#800000" },
-            { title: "*PROYEK BARU 48", loc: "Lokasi Proyek 48", img: "https://picsum.photos/id/58/800/800", border: "#1A1A1A" },
-            { title: "*PROYEK BARU 49", loc: "Lokasi Proyek 49", img: "https://picsum.photos/id/59/800/800", border: "#800000" },
-            { title: "*PROYEK BARU 50", loc: "Lokasi Proyek 50", img: "https://picsum.photos/id/60/800/800", border: "#1A1A1A" },
-            { title: "*PROYEK BARU 51", loc: "Lokasi Proyek 51", img: "https://picsum.photos/id/61/800/800", border: "#800000" },
-            { title: "*PROYEK BARU 52", loc: "Lokasi Proyek 52", img: "https://picsum.photos/id/62/800/800", border: "#1A1A1A" },
-            { title: "*PROYEK BARU 53", loc: "Lokasi Proyek 53", img: "https://picsum.photos/id/63/800/800", border: "#800000" },
-            { title: "*PROYEK BARU 54", loc: "Lokasi Proyek 54", img: "https://picsum.photos/id/64/800/800", border: "#1A1A1A" },
-            { title: "*PROYEK BARU 55", loc: "Lokasi Proyek 55", img: "https://picsum.photos/id/65/800/800", border: "#800000" },
-            { title: "*PROYEK BARU 56", loc: "Lokasi Proyek 56", img: "https://picsum.photos/id/66/800/800", border: "#1A1A1A" },
-            { title: "*PROYEK BARU 57", loc: "Lokasi Proyek 57", img: "https://picsum.photos/id/67/800/800", border: "#800000" },
-            { title: "*PROYEK BARU 58", loc: "Lokasi Proyek 58", img: "https://picsum.photos/id/68/800/800", border: "#1A1A1A" },
-            { title: "*PROYEK BARU 59", loc: "Lokasi Proyek 59", img: "https://picsum.photos/id/69/800/800", border: "#800000" },
-            { title: "*PROYEK BARU 60", loc: "Lokasi Proyek 60", img: "https://picsum.photos/id/70/800/800", border: "#1A1A1A" },
-            { title: "*PROYEK BARU 61", loc: "Lokasi Proyek 61", img: "https://picsum.photos/id/71/800/800", border: "#800000" },
-            { title: "*PROYEK BARU 62", loc: "Lokasi Proyek 62", img: "https://picsum.photos/id/72/800/800", border: "#1A1A1A" },
-            { title: "*PROYEK BARU 63", loc: "Lokasi Proyek 63", img: "https://picsum.photos/id/73/800/800", border: "#800000" },
-            { title: "*PROYEK BARU 64", loc: "Lokasi Proyek 64", img: "https://picsum.photos/id/74/800/800", border: "#1A1A1A" },
-            { title: "*PROYEK BARU 65", loc: "Lokasi Proyek 65", img: "https://picsum.photos/id/75/800/800", border: "#800000" },
-            { title: "*PROYEK BARU 66", loc: "Lokasi Proyek 66", img: "https://picsum.photos/id/76/800/800", border: "#1A1A1A" },
-            { title: "*PROYEK BARU 67", loc: "Lokasi Proyek 67", img: "https://picsum.photos/id/77/800/800", border: "#800000" },
-            { title: "*PROYEK BARU 68", loc: "Lokasi Proyek 68", img: "https://picsum.photos/id/78/800/800", border: "#1A1A1A" },
-            { title: "*PROYEK BARU 69", loc: "Lokasi Proyek 69", img: "https://picsum.photos/id/79/800/800", border: "#800000" },
-            { title: "*PROYEK BARU 70", loc: "Lokasi Proyek 70", img: "https://picsum.photos/id/80/800/800", border: "#1A1A1A" },
-            { title: "*PROYEK BARU 71", loc: "Lokasi Proyek 71", img: "https://picsum.photos/id/81/800/800", border: "#800000" },
-            { title: "*PROYEK BARU 72", loc: "Lokasi Proyek 72", img: "https://picsum.photos/id/82/800/800", border: "#1A1A1A" },
-            { title: "*PROYEK BARU 73", loc: "Lokasi Proyek 73", img: "https://picsum.photos/id/83/800/800", border: "#800000" },
-            { title: "*PROYEK BARU 74", loc: "Lokasi Proyek 74", img: "https://picsum.photos/id/84/800/800", border: "#1A1A1A" },
-            { title: "*PROYEK BARU 75", loc: "Lokasi Proyek 75", img: "https://picsum.photos/id/85/800/800", border: "#800000" },
-            { title: "*PROYEK BARU 76", loc: "Lokasi Proyek 76", img: "https://picsum.photos/id/86/800/800", border: "#1A1A1A" },
-            { title: "*PROYEK BARU 77", loc: "Lokasi Proyek 77", img: "https://picsum.photos/id/87/800/800", border: "#800000" },
-            { title: "*PROYEK BARU 78", loc: "Lokasi Proyek 78", img: "https://picsum.photos/id/88/800/800", border: "#1A1A1A" },
-            { title: "*PROYEK BARU 79", loc: "Lokasi Proyek 79", img: "https://picsum.photos/id/89/800/800", border: "#800000" },
-            { title: "*PROYEK BARU 80", loc: "Lokasi Proyek 80", img: "https://picsum.photos/id/90/800/800", border: "#1A1A1A" },
-            { title: "*PROYEK BARU 81", loc: "Lokasi Proyek 81", img: "https://picsum.photos/id/91/800/800", border: "#800000" },
-            { title: "*PROYEK BARU 82", loc: "Lokasi Proyek 82", img: "https://picsum.photos/id/92/800/800", border: "#1A1A1A" },
-            { title: "*PROYEK BARU 83", loc: "Lokasi Proyek 83", img: "https://picsum.photos/id/93/800/800", border: "#800000" },
-            { title: "*PROYEK BARU 84", loc: "Lokasi Proyek 84", img: "https://picsum.photos/id/94/800/800", border: "#1A1A1A" },
-            { title: "*PROYEK BARU 85", loc: "Lokasi Proyek 85", img: "https://picsum.photos/id/95/800/800", border: "#800000" },
-            { title: "*PROYEK BARU 86", loc: "Lokasi Proyek 86", img: "https://picsum.photos/id/96/800/800", border: "#1A1A1A" },
-            { title: "*PROYEK BARU 87", loc: "Lokasi Proyek 87", img: "https://picsum.photos/id/97/800/800", border: "#800000" },
-            { title: "*PROYEK BARU 88", loc: "Lokasi Proyek 88", img: "https://picsum.photos/id/98/800/800", border: "#1A1A1A" },
-            { title: "*PROYEK BARU 89", loc: "Lokasi Proyek 89", img: "https://picsum.photos/id/99/800/800", border: "#800000" },
-            { title: "*PROYEK BARU 90", loc: "Lokasi Proyek 90", img: "https://picsum.photos/id/100/800/800", border: "#1A1A1A" },
-            { title: "*PROYEK BARU 91", loc: "Lokasi Proyek 91", img: "https://picsum.photos/id/101/800/800", border: "#800000" },
-            { title: "*PROYEK BARU 92", loc: "Lokasi Proyek 92", img: "https://picsum.photos/id/102/800/800", border: "#1A1A1A" },
-            { title: "*PROYEK BARU 93", loc: "Lokasi Proyek 93", img: "https://picsum.photos/id/103/800/800", border: "#800000" },
-            { title: "*PROYEK BARU 94", loc: "Lokasi Proyek 94", img: "https://picsum.photos/id/104/800/800", border: "#1A1A1A" },
-            { title: "*PROYEK BARU 95", loc: "Lokasi Proyek 95", img: "https://picsum.photos/id/105/800/800", border: "#800000" },
-            { title: "*PROYEK BARU 96", loc: "Lokasi Proyek 96", img: "https://picsum.photos/id/106/800/800", border: "#1A1A1A" },
-            { title: "*PROYEK BARU 97", loc: "Lokasi Proyek 97", img: "https://picsum.photos/id/107/800/800", border: "#800000" },
-            { title: "*PROYEK BARU 98", loc: "Lokasi Proyek 98", img: "https://picsum.photos/id/108/800/800", border: "#1A1A1A" },
-            { title: "*PROYEK BARU 99", loc: "Lokasi Proyek 99", img: "https://picsum.photos/id/109/800/800", border: "#800000" },
-            { title: "*PROYEK BARU 100", loc: "Lokasi Proyek 100", img: "https://picsum.photos/id/110/800/800", border: "#1A1A1A" }
-        ];
+        // --- KONFIGURASI FIREBASE ---
+        // Ganti objek di bawah ini dengan data dari Firebase Project Settings Anda
+        const firebaseConfig = {
+            apiKey: "AIzaSyDLHKmV8hgZz6JW_HrHU9ECMhdez-okcJM",
+            authDomain: "rits-nusa-kenari.firebaseapp.com",
+            projectId: "rits-nusa-kenari",
+            storageBucket: "rits-nusa-kenari.firebasestorage.app",
+            messagingSenderId: "202926194116",
+            appId: "1:202926194116:web:0e177ccaac302082e5f891",
+            measurementId: "G-Y5PRFCV9EG"
+        };
+
+        // Inisialisasi Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // Fungsi Sinkronisasi Cloud
+        async function syncFromCloud() {
+            try {
+                const snapshot = await db.collection("portfolios").orderBy("createdAt", "desc").get();
+                const cloudData = snapshot.docs.map(doc => ({ 
+                    id: doc.id, 
+                    ...doc.data() 
+                }));
+                if (cloudData.length > 0) {
+                    portfolioData = cloudData;
+                    renderPortfolio();
+                }
+            } catch (error) {
+                console.error("Error syncing cloud data:", error);
+            }
+        }
 
         function renderPortfolio() {
             const grid = document.getElementById('portfolio-grid');
+            const adminList = document.getElementById('admin-list');
             if (!grid) return;
             
             // Hanya tampilkan proyek yang judulnya TIDAK diawali tanda '*'
@@ -2168,9 +2151,121 @@
                 `;
             }).join('');
             
+            // Render List untuk Admin Panel
+            if(adminList) {
+                // Gunakan map dari portfolioData asli agar INDEX tetap akurat
+                adminList.innerHTML = portfolioData.map((item, index) => {
+                    if (item.title.startsWith('*')) return ''; // Lewati item template
+                    return `
+                    <div class="flex items-center justify-between p-4 bg-gray-50 rounded-2xl border border-gray-100">
+                        <div class="flex items-center gap-4">
+                            <img src="${item.img}" class="w-12 h-12 rounded-lg object-cover">
+                            <div>
+                                <h5 class="font-bold text-sm leading-tight">${item.title}</h5>
+                                <p class="text-[10px] text-gray-500">${item.loc}</p>
+                            </div>
+                        </div>
+                        <button onclick="deleteProject(${index})" class="text-red-500 hover:bg-red-50 p-2 rounded-lg transition-colors">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `; }).join('');
+            }
+
             // Inisialisasi ulang animasi setelah elemen ditambahkan ke DOM
             setTimeout(initScrollAnimations, 100);
         }
+
+        // ADMIN LOGIC
+        function handleLogin() {
+            const pass = document.getElementById('adminPass').value;
+            if (pass === "rits2026") { // Ganti dengan password pilihan Anda
+                showPage('admin-dashboard');
+                localStorage.setItem('admin_logged', 'true');
+            } else {
+                alert("Password Salah!");
+            }
+        }
+
+        function handleLogout() {
+            localStorage.removeItem('admin_logged');
+            showPage('home');
+        }
+
+        async function addProject() {
+            const title = document.getElementById('newTitle').value;
+            const loc = document.getElementById('newLoc').value;
+            const imgFile = document.getElementById('newImg').files[0];
+            const border = document.getElementById('newBorder').value;
+            const saveBtn = event.target;
+
+            if (!title || !loc || !imgFile) return alert("Isi semua field dan pilih gambar!");
+
+            // Efek Loading pada tombol
+            const originalText = saveBtn.innerText;
+            saveBtn.innerText = "UPLOADING TO SERVER...";
+            saveBtn.disabled = true;
+
+            try {
+                // 1. Proses Upload ke Cloud Server (ImgBB)
+                const apiKey = "3830aabfb1bf4caccc4fe7cd8b3ae5bb"; // Ganti dengan API Key dari imgbb.com
+                const formData = new FormData();
+                formData.append("image", imgFile);
+
+                const response = await fetch(`https://api.imgbb.com/1/upload?key=${apiKey}`, {
+                    method: "POST",
+                    body: formData
+                });
+                const result = await response.json();
+
+                if (result.success) {
+                    const uploadedUrl = result.data.url;
+
+                    // 2. Simpan Data ke Cloud Firestore
+                    const newProject = {
+                        title: title.toUpperCase(),
+                        loc: loc,
+                        img: uploadedUrl,
+                        border: border,
+                        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                    };
+                    
+                    await db.collection("portfolios").add(newProject);
+                    await syncFromCloud();
+
+                    // Reset Form
+                    document.getElementById('newTitle').value = '';
+                    document.getElementById('newLoc').value = '';
+                    document.getElementById('newImg').value = '';
+                    alert("Proyek berhasil diupload dan disimpan secara permanen!");
+                } else {
+                    throw new Error("Gagal mengunggah gambar");
+                }
+            } catch (error) {
+                console.error(error);
+                alert("Terjadi kesalahan saat upload. Pastikan koneksi internet stabil.");
+            } finally {
+                saveBtn.innerText = originalText;
+                saveBtn.disabled = false;
+            }
+        }
+
+        async function deleteProject(index) {
+            if (confirm("Hapus proyek ini dari portofolio?")) {
+                const project = portfolioData[index];
+                if (project.id) {
+                    await db.collection("portfolios").doc(project.id).delete();
+                    await syncFromCloud();
+                } else {
+                    // Jika data statis (belum ada di cloud), hapus dari array lokal saja
+                    portfolioData.splice(index, 1);
+                    renderPortfolio();
+                }
+            }
+        }
+
+        // Auto Login check
+        const isAdmin = localStorage.getItem('admin_logged');
 
         const details = {
             management: { title: "Management Fee", desc: "Kami mengelola penuh operasional dengan imbal jasa tetap. Investasi perangkat keras sepenuhnya menjadi tanggung jawab kami. Owner menerima pendapatan bersih setelah biaya operasional." },
@@ -2398,6 +2493,7 @@
 
         window.onload = () => {
             const initialPage = location.hash.replace('#', '') || 'home';
+            syncFromCloud(); // Ambil data terbaru dari internet saat web dibuka
             renderPortfolio();
             showPage(initialPage, false);
         };
