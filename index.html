@@ -2181,7 +2181,7 @@
                             </div>
                         </div>
                         ${item.isStatic ? '<span class="text-[8px] font-bold text-gray-300 uppercase">System Default</span>' : 
-                        `<button onclick="deleteProject(${index})" class="text-red-500 hover:bg-red-50 p-2 rounded-lg transition-colors"><i class="fas fa-trash"></i></button>`}
+                        `<button onclick="deleteProject(${index})" class="text-red-500 hover:bg-red-50 p-2 rounded-lg transition-colors" title="Hapus Proyek"><i class="fas fa-trash"></i></button>`}
                     </div>
                 `; }).join('');
             }
@@ -2226,7 +2226,7 @@
             const imgFile = document.getElementById('newImg').files[0];
             const border = document.getElementById('newBorder').value;
 
-            if (!title || !loc || !imgFile) { showNotify("Lengkapi data & pilih gambar!", "error"); return; }
+            if (!title || !loc || !imgFile) { showNotify("Mohon lengkapi semua data dan pilih gambar!", "error"); return; }
 
             const saveBtn = btnElement;
 
@@ -2259,8 +2259,7 @@
                         createdAt: firebase.firestore.FieldValue.serverTimestamp()
                     };
                     
-                    await db.collection("portfolios").add(newProject);
-                    await syncFromCloud();
+                    await db.collection("portfolios").add(newProject); // onSnapshot akan otomatis memicu render
 
                     // Reset Form
                     document.getElementById('newTitle').value = '';
@@ -2282,7 +2281,7 @@
         async function deleteProject(index) {
             if (confirm("Hapus proyek ini dari portofolio?")) {
                 const project = portfolioData[index];
-                if (project.id) {
+                if (project.id && !project.isStatic) { // Pastikan bukan data statis
                     await db.collection("portfolios").doc(project.id).delete();
                     await syncFromCloud();
                     showNotify("Proyek berhasil dihapus.");
@@ -2438,8 +2437,7 @@
 
         window.onload = () => {
             const initialPage = location.hash.replace('#', '') || 'home';
-            syncFromCloud(); // Ambil data terbaru dari internet saat web dibuka
-            renderPortfolio();
+            syncFromCloud(); // Hanya panggil syncFromCloud, yang akan memicu renderPortfolio melalui onSnapshot
             showPage(initialPage, false);
         };
     </script>
