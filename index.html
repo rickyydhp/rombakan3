@@ -309,7 +309,7 @@
                 <button onclick="showPage('services')" class="nav-link hover:text-[#800000]">Services</button>
                 <button onclick="showPage('portfolio')" class="nav-link hover:text-[#800000]">Portfolio</button>
                 <button onclick="showPage('career')" class="nav-link hover:text-[#800000]">Career</button>
-                <button onclick="showPage('admin-login')" id="adminNav" class="nav-link text-gray-500 hover:text-[#800000] opacity-50 hover:opacity-100 transition-opacity" title="Admin Login"><i class="fas fa-lock text-xs"></i></button>
+                <button onclick="showPage('admin-login')" id="adminNav" class="nav-link text-[#800000] bg-[#800000]/5 p-2 rounded-xl ml-2 hover:bg-[#800000] hover:text-white transition-all shadow-sm" title="Admin Login"><i class="fas fa-lock text-sm md:text-base"></i></button>
                 <button onclick="showPage('contact')" 
                     class="nav-link bg-[#800000] text-white px-6 py-2.5 rounded-full hover:bg-black transition-all shadow-md !border-none after:hidden">Get
                     in Touch</button>
@@ -330,7 +330,7 @@
             <button onclick="showPage('services'); toggleMenu()" class="hover:text-[#800000]">Services</button>
             <button onclick="showPage('portfolio'); toggleMenu()" class="hover:text-[#800000]">Portfolio</button>
             <button onclick="showPage('career'); toggleMenu()" class="hover:text-[#800000]">Career</button>
-            <button onclick="showPage('admin-login'); toggleMenu()" class="text-gray-400 text-sm">Admin Login</button>
+            <button onclick="showPage('admin-login'); toggleMenu()" class="text-[#800000] text-sm font-bold flex items-center justify-center gap-2"><i class="fas fa-user-shield"></i> Admin Login</button>
             <button onclick="showPage('contact'); toggleMenu()"
                 class="bg-[#800000] text-white py-4 rounded-2xl shadow-xl">Contact Us</button>
         </div>
@@ -2005,7 +2005,7 @@
                             <option value="#1A1A1A">Border Carbon</option>
                         </select>
                     </div>
-                    <button onclick="addProject()" class="mt-4 bg-[#800000] text-white px-8 py-3 rounded-xl font-bold text-xs uppercase">Simpan Proyek</button>
+                    <button onclick="addProject(this)" class="mt-4 bg-[#800000] text-white px-8 py-3 rounded-xl font-bold text-xs uppercase disabled:opacity-50">Simpan Proyek</button>
                 </div>
 
                 <!-- List Editor -->
@@ -2018,6 +2018,11 @@
             </div>
         </section>
     </main>
+
+    <!-- TOAST NOTIFICATION SYSTEM -->
+    <div id="toast" class="fixed top-24 left-1/2 -translate-x-1/2 z-[200] px-6 py-3 rounded-2xl text-white font-bold text-xs md:text-sm shadow-2xl transition-all duration-500 opacity-0 pointer-events-none translate-y-[-20px]">
+        <span id="toastMsg"></span>
+    </div>
 
     <!-- FOOTER -->
     <footer class="bg-[#1A1A1A] text-white pt-24 pb-12 px-6">
@@ -2107,15 +2112,17 @@
         // Fungsi Sinkronisasi Cloud
         async function syncFromCloud() {
             try {
-                const snapshot = await db.collection("portfolios").orderBy("createdAt", "desc").get();
-                const cloudData = snapshot.docs.map(doc => ({ 
-                    id: doc.id, 
-                    ...doc.data() 
-                }));
-                if (cloudData.length > 0) {
+                // Menggunakan onSnapshot agar sinkron otomatis di semua perangkat tanpa refresh
+                db.collection("portfolios").orderBy("createdAt", "desc").onSnapshot((snapshot) => {
+                    const cloudData = snapshot.docs.map(doc => ({ 
+                        id: doc.id, 
+                        ...doc.data() 
+                    }));
                     portfolioData = cloudData;
                     renderPortfolio();
-                }
+                }, error => {
+                    console.error("Firestore Error:", error);
+                });
             } catch (error) {
                 console.error("Error syncing cloud data:", error);
             }
@@ -2126,6 +2133,11 @@
             const adminList = document.getElementById('admin-list');
             if (!grid) return;
             
+            if (portfolioData.length === 0) {
+                grid.innerHTML = `<p class="col-span-full text-center py-10 text-gray-400 italic">Belum ada data portofolio. Silakan tambah melalui menu Admin.</p>`;
+                return;
+            }
+
             // Hanya tampilkan proyek yang judulnya TIDAK diawali tanda '*'
             const visibleProjects = portfolioData.filter(item => !item.title.startsWith('*'));
 
@@ -2192,14 +2204,29 @@
             showPage('home');
         }
 
-        async function addProject() {
+        // Global Toast Function
+        function showNotify(msg, type = 'success') {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toastMsg');
+            toast.style.backgroundColor = type === 'success' ? '#2ecc71' : '#e74c3c';
+            toastMsg.innerText = msg;
+            toast.classList.add('opacity-100', 'translate-y-0');
+            toast.classList.remove('opacity-0', 'translate-y-[-20px]');
+            setTimeout(() => {
+                toast.classList.remove('opacity-100', 'translate-y-0');
+                toast.classList.add('opacity-0', 'translate-y-[-20px]');
+            }, 3000);
+        }
+
+        async function addProject(btnElement) {
             const title = document.getElementById('newTitle').value;
             const loc = document.getElementById('newLoc').value;
             const imgFile = document.getElementById('newImg').files[0];
             const border = document.getElementById('newBorder').value;
-            const saveBtn = event.target;
 
-            if (!title || !loc || !imgFile) return alert("Isi semua field dan pilih gambar!");
+            if (!title || !loc || !imgFile) return showNotify("Mohon lengkapi semua data!", "error");
+
+            const saveBtn = btnElement || document.querySelector('#admin-dashboard button[onclick^="addProject"]');
 
             // Efek Loading pada tombol
             const originalText = saveBtn.innerText;
@@ -2237,13 +2264,13 @@
                     document.getElementById('newTitle').value = '';
                     document.getElementById('newLoc').value = '';
                     document.getElementById('newImg').value = '';
-                    alert("Proyek berhasil diupload dan disimpan secara permanen!");
+                    showNotify("Berhasil! Portofolio diperbarui di seluruh dunia.");
                 } else {
                     throw new Error("Gagal mengunggah gambar");
                 }
             } catch (error) {
                 console.error(error);
-                alert("Terjadi kesalahan saat upload. Pastikan koneksi internet stabil.");
+                showNotify("Gagal! Cek koneksi internet atau API Key.", "error");
             } finally {
                 saveBtn.innerText = originalText;
                 saveBtn.disabled = false;
@@ -2256,6 +2283,7 @@
                 if (project.id) {
                     await db.collection("portfolios").doc(project.id).delete();
                     await syncFromCloud();
+                    showNotify("Proyek berhasil dihapus.");
                 } else {
                     // Jika data statis (belum ada di cloud), hapus dari array lokal saja
                     portfolioData.splice(index, 1);
