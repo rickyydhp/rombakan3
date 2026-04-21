@@ -2090,8 +2090,16 @@
 
     <script>
         // Database Portfolio
-        // Kosongkan array agar web hanya menampilkan data real-time dari Firebase Cloud
         let portfolioData = [];
+        const initialPortfolio = [
+            { title: "KAWASAN BIMOLI", loc: "Jakarta Utara", img: "foto/bimoli.jpeg", border: "#800000", isStatic: true },
+            { title: "RS MARY CILEUNGSI", loc: "Bogor, Jawa Barat", img: "foto/rs_mery.jpeg", border: "#1A1A1A", isStatic: true },
+            { title: "HOLLYWOOD JUNCTION", loc: "Cikarang", img: "foto/jababeka.jpeg", border: "#800000", isStatic: true },
+            { title: "GADING CENTER", loc: "Jakarta Utara", img: "https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800", border: "#1A1A1A", isStatic: true },
+            { title: "SIAK PORT AREA", loc: "Tanjung Priok", img: "https://images.unsplash.com/photo-1524522173746-f628baad3644?q=80&w=800", border: "#800000", isStatic: true },
+            { title: "SIAK LOGISTIC", loc: "Tanjung Priok", img: "https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?q=80&w=800", border: "#1A1A1A", isStatic: true },
+            { title: "OFFICE AREA RITS", loc: "Head Office", img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800", border: "#800000", isStatic: true }
+        ];
 
         // --- KONFIGURASI FIREBASE ---
         // Ganti objek di bawah ini dengan data dari Firebase Project Settings Anda
@@ -2112,13 +2120,13 @@
         // Fungsi Sinkronisasi Cloud
         async function syncFromCloud() {
             try {
-                // Menggunakan onSnapshot agar sinkron otomatis di semua perangkat tanpa refresh
                 db.collection("portfolios").orderBy("createdAt", "desc").onSnapshot((snapshot) => {
                     const cloudData = snapshot.docs.map(doc => ({ 
                         id: doc.id, 
                         ...doc.data() 
                     }));
-                    portfolioData = cloudData;
+                    // Gabungkan data Cloud (Terbaru) dengan data Statis Awal
+                    portfolioData = [...cloudData, ...initialPortfolio];
                     renderPortfolio();
                 }, error => {
                     console.error("Firestore Error:", error);
@@ -2133,11 +2141,6 @@
             const adminList = document.getElementById('admin-list');
             if (!grid) return;
             
-            if (portfolioData.length === 0) {
-                grid.innerHTML = `<p class="col-span-full text-center py-10 text-gray-400 italic">Belum ada data portofolio. Silakan tambah melalui menu Admin.</p>`;
-                return;
-            }
-
             // Hanya tampilkan proyek yang judulnya TIDAK diawali tanda '*'
             const visibleProjects = portfolioData.filter(item => !item.title.startsWith('*'));
 
@@ -2177,9 +2180,8 @@
                                 <p class="text-[10px] text-gray-500">${item.loc}</p>
                             </div>
                         </div>
-                        <button onclick="deleteProject(${index})" class="text-red-500 hover:bg-red-50 p-2 rounded-lg transition-colors">
-                            <i class="fas fa-trash"></i>
-                        </button>
+                        ${item.isStatic ? '<span class="text-[8px] font-bold text-gray-300 uppercase">System Default</span>' : 
+                        `<button onclick="deleteProject(${index})" class="text-red-500 hover:bg-red-50 p-2 rounded-lg transition-colors"><i class="fas fa-trash"></i></button>`}
                     </div>
                 `; }).join('');
             }
@@ -2224,9 +2226,9 @@
             const imgFile = document.getElementById('newImg').files[0];
             const border = document.getElementById('newBorder').value;
 
-            if (!title || !loc || !imgFile) return showNotify("Mohon lengkapi semua data!", "error");
+            if (!title || !loc || !imgFile) { showNotify("Lengkapi data & pilih gambar!", "error"); return; }
 
-            const saveBtn = btnElement || document.querySelector('#admin-dashboard button[onclick^="addProject"]');
+            const saveBtn = btnElement;
 
             // Efek Loading pada tombol
             const originalText = saveBtn.innerText;
@@ -2514,6 +2516,23 @@
                 })
                 .finally(() => {
                     btn.innerText = originalText;
+                    btn.disabled = false;
+                });
+            });
+        }
+
+        window.onload = () => {
+            const initialPage = location.hash.replace('#', '') || 'home';
+            syncFromCloud(); // Ambil data terbaru dari internet saat web dibuka
+            renderPortfolio();
+            showPage(initialPage, false);
+        };
+    </script>
+</body>
+
+</html> 
+
+</html>             btn.innerText = originalText;
                     btn.disabled = false;
                 });
             });
