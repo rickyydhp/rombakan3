@@ -2120,17 +2120,21 @@
         // Fungsi Sinkronisasi Cloud
         async function syncFromCloud() {
             try {
-                db.collection("portfolios").orderBy("createdAt", "desc").onSnapshot((snapshot) => {
-                    const cloudData = snapshot.docs.map(doc => ({ 
-                        id: doc.id, 
-                        ...doc.data() 
-                    }));
-                    // Gabungkan data Cloud (Terbaru) dengan data Statis Awal
-                    portfolioData = [...cloudData, ...initialPortfolio];
-                    renderPortfolio();
-                }, error => {
-                    console.error("Firestore Error:", error);
-                });
+                db.collection("portfolios").orderBy("createdAt", "desc").onSnapshot(
+                    (snapshot) => {
+                        const cloudData = snapshot.docs.map(doc => ({ 
+                            id: doc.id, 
+                            ...doc.data() 
+                        }));
+                        // Gabungkan data Cloud (Terbaru) dengan data Statis Awal
+                        portfolioData = [...cloudData, ...initialPortfolio];
+                        renderPortfolio();
+                    }, 
+                    (error) => {
+                        console.error("Firestore Sync Error:", error);
+                        showNotify("Gagal sinkronisasi data cloud: " + error.message, "error");
+                    }
+                );
             } catch (error) {
                 console.error("Error syncing cloud data:", error);
             }
@@ -2168,9 +2172,13 @@
             
             // Render List untuk Admin Panel
             if(adminList) {
-                // Gunakan map dari portfolioData asli agar INDEX tetap akurat
-                adminList.innerHTML = portfolioData.map((item, index) => {
+                adminList.innerHTML = portfolioData.map((item) => {
                     if (item.title.startsWith('*')) return ''; // Lewati item template
+                    
+                    // Gunakan ID unik dari Firebase jika ada, jika tidak pakai index (statis)
+                    const identifier = item.id || 'static';
+                    const isDeletable = !item.isStatic;
+
                     return `
                     <div class="flex items-center justify-between p-4 bg-gray-50 rounded-2xl border border-gray-100">
                         <div class="flex items-center gap-4">
@@ -2180,8 +2188,8 @@
                                 <p class="text-[10px] text-gray-500">${item.loc}</p>
                             </div>
                         </div>
-                        ${item.isStatic ? '<span class="text-[8px] font-bold text-gray-300 uppercase">System Default</span>' : 
-                        `<button onclick="deleteProject(${index})" class="text-red-500 hover:bg-red-50 p-2 rounded-lg transition-colors" title="Hapus Proyek"><i class="fas fa-trash"></i></button>`}
+                        ${!isDeletable ? '<span class="text-[8px] font-bold text-gray-300 uppercase">System Default</span>' : 
+                        `<button onclick="deleteProject('${identifier}')" class="text-red-500 hover:bg-red-50 p-2 rounded-lg transition-colors" title="Hapus Proyek"><i class="fas fa-trash"></i></button>`}
                     </div>
                 `; }).join('');
             }
@@ -2232,8 +2240,9 @@
 
             // Efek Loading pada tombol
             const originalText = saveBtn.innerText;
-            saveBtn.innerText = "UPLOADING TO SERVER...";
+            saveBtn.innerText = "SEDANG MENGUNGGAH...";
             saveBtn.disabled = true;
+            saveBtn.classList.add('opacity-50', 'cursor-not-allowed');
 
             try {
                 // 1. Proses Upload ke Cloud Server (ImgBB)
@@ -2259,36 +2268,36 @@
                         createdAt: firebase.firestore.FieldValue.serverTimestamp()
                     };
                     
-                    await db.collection("portfolios").add(newProject); // onSnapshot akan otomatis memicu render
-
-                    // Reset Form
-                    document.getElementById('newTitle').value = '';
-                    document.getElementById('newLoc').value = '';
-                    document.getElementById('newImg').value = '';
-                    showNotify("Berhasil! Portofolio diperbarui di seluruh dunia.");
+                    // Simpan data ke Firestore
+                    await db.collection("portfolios").add(newProject);
+                    
+                    showNotify("Berhasil! Proyek telah disimpan permanen.");
+                    
+                    // Reset input setelah berhasil
+                    document.getElementById('newTitle').value = "";
+                    document.getElementById('newLoc').value = "";
+                    document.getElementById('newImg').value = null;
                 } else {
-                    throw new Error("Gagal mengunggah gambar");
+                    throw new Error("Gagal mengunggah gambar ke ImgBB");
                 }
             } catch (error) {
-                console.error(error);
-                showNotify("Gagal! Cek koneksi internet atau API Key.", "error");
+                console.error("Detailed Error:", error);
+                showNotify("Gagal: " + (error.code === 'permission-denied' ? "Izin Firebase Ditolak (Cek Security Rules di Console)" : error.message), "error");
             } finally {
                 saveBtn.innerText = originalText;
                 saveBtn.disabled = false;
+                saveBtn.classList.remove('opacity-50', 'cursor-not-allowed');
             }
         }
 
-        async function deleteProject(index) {
-            if (confirm("Hapus proyek ini dari portofolio?")) {
-                const project = portfolioData[index];
-                if (project.id && !project.isStatic) { // Pastikan bukan data statis
-                    await db.collection("portfolios").doc(project.id).delete();
-                    await syncFromCloud();
-                    showNotify("Proyek berhasil dihapus.");
-                } else {
-                    // Jika data statis (belum ada di cloud), hapus dari array lokal saja
-                    portfolioData.splice(index, 1);
-                    renderPortfolio();
+        async function deleteProject(id) {
+            if (id === 'static') return;
+            if (confirm("Hapus proyek ini secara permanen dari Cloud?")) {
+                try {
+                    await db.collection("portfolios").doc(id).delete();
+                    showNotify("Proyek berhasil dihapus dari server.");
+                } catch (error) {
+                    showNotify("Gagal menghapus: " + error.message, "error");
                 }
             }
         }
