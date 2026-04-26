@@ -178,7 +178,7 @@
             <div class="flex items-center gap-4 cursor-pointer group" onclick="showPage('home')">
                 <div
                     class="w-12 h-12 md:w-14 md:h-14 bg-[#800000] rounded-xl flex items-center justify-center shadow-lg group-hover:rotate-6 transition-transform">
-                    <img src="logo.png" alt="RITS" class="w-8 h-8 md:w-10 md:h-10 object-contain">
+                    <img src="foto/logo_rits1" class="w-8 h-8 md:w-10 md:h-10 object-contain">
                 </div>
                 <div>
                     <h1 class="font-extrabold text-lg md:text-xl leading-none tracking-tighter text-[#3E2723]">RITS NUSA
